@@ -1,11 +1,135 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>My portfolio</h1>
-</body>
+    <head>
+        <link rel="stylesheet" href="index.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <script>
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+
+            window.onload = async function() {
+
+                var letters= document.body.getElementsByClassName("headingLetter");
+
+                for(let i=0; i<letters.length; i++) {    
+                    letters[i].style.visibility="hidden";
+                }
+
+                for(let i=0; i<letters.length; i++) {    
+                    letters[i].className += " bounceIn";
+                    letters[i].style.visibility="visible";
+                    await sleep(50);
+                }
+            }
+
+            function showMenu(element){
+                var showMenu = document.body.getElementsByClassName("showMenu")[0];
+                if(showMenu.style.visibility == "visible"){
+                    element.setAttribute("src", "Images/moreMenu.png");
+                    showMenu.style.visibility="hidden";
+                    showMenu.style.display="none";
+                    return;
+                }
+                element.setAttribute("src", "Images/closeMenuIcon.png");
+                showMenu.style.visibility="visible";
+                showMenu.style.display="block";
+            }
+
+            function imageChangeSrc(element,srcToChangeTo){
+                element.setAttribute("src",srcToChangeTo);
+            }
+
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <img class="showMenuButton" src="Images/moreMenu.png" onclick="showMenu(this)"/>
+            <div class="showMenu">
+                <div class="showMenuImageContainer">
+                    <img src = "Images/logo.png" class = "showMenuImage"/>
+                </div>
+                <div class = "showMenuHeading">Pavel</div>
+                <div class="showMenuSubHeading">Game Programmer</div>
+
+                <ul class="showMenuList">
+                    <li class = "showMenuListElement">About</li>
+                    <li class = "showMenuListElement">My Skills</li>
+                    <li class = "showMenuListElement">Work</li>
+                    <li class = "showMenuListElement">Contact</li>
+                    <li class = "showMenuListElement">Blog</li>
+                    <div class="showMenuIcons">
+                        <a href="https://github.com/PavelKosik" style="visibility: hidden;"><img 
+                            src="Images/github.png" 
+                            class="showMenuIconElement" 
+                            onmouseover="imageChangeSrc(this,'Images/githubHover.png')" 
+                            onmouseout="imageChangeSrc(this,'Images/github.png')">
+                        </a>
+
+                        <a href="https://www.youtube.com/channel/UCwHl86YmfEdpqxvGKH7qbtw" style="visibility: hidden;"><img 
+                            src="Images/youtube.png" 
+                            class="showMenuIconElement" 
+                            onmouseover="imageChangeSrc(this,'Images/youtubeHover.png')" 
+                            onmouseout="imageChangeSrc(this,'Images/youtube.png')">
+                        </a>
+                    </div>
+                </ul>
+            </div>
+            <div class="headingLetterContainer">
+                <span class="headingLetter">H</span>
+                <span class="headingLetter">i</span>
+                <span class="headingLetter">,</span>
+                <br/>
+                <span class="headingLetter">I</span>
+                <span class="headingLetter">'</span>
+                <span class="headingLetter">m</span>    
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <span class="headingLetter">P</span>
+                <span class="headingLetter">a</span>
+                <span class="headingLetter">v</span>
+                <span class="headingLetter">e</span>
+                <span class="headingLetter">l</span>
+                <span class="headingLetter">,</span>
+                <br/>
+
+                <span class="headingLetter">g</span>
+                <span class="headingLetter">a</span>
+                <span class="headingLetter">m</span>
+                <span class="headingLetter">e</span>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+
+                <span class="headingLetter">p</span>
+                <span class="headingLetter">r</span>
+                <span class="headingLetter">o</span>
+                <span class="headingLetter">g</span>
+                <span class="headingLetter">r</span>
+                <span class="headingLetter">a</span>
+                <span class="headingLetter">m</span>
+                <span class="headingLetter">m</span>
+                <span class="headingLetter">e</span>
+                <span class="headingLetter">r</span>
+
+            </div>
+
+            <br/>
+            <br/>
+            <div class="smallText">Unity / Unreal Engine</div>
+            <button class="button"><div class="buttonText">Contact me!</div></button>
+
+            <h2 class="heading">My portfolio</h2>
+        </div>
+    </body>
 </html>
