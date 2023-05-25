@@ -1,135 +1,247 @@
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="index.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+	<head>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
 
-        <script>
+		<script>
+			function sleep(ms) {
+				return new Promise((resolve) => setTimeout(resolve, ms));
+			}
 
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
+			window.onload = async function () {
+				var letters = document.body.getElementsByClassName("headingLetter");
 
-            window.onload = async function() {
+				for (let i = 0; i < letters.length; i++) {
+					letters[i].style.visibility = "hidden";
+				}
 
-                var letters= document.body.getElementsByClassName("headingLetter");
+				for (let i = 0; i < letters.length; i++) {
+					letters[i].className += " bounceIn";
+					letters[i].style.visibility = "visible";
+					await sleep(50);
+				}
+			};
 
-                for(let i=0; i<letters.length; i++) {    
-                    letters[i].style.visibility="hidden";
-                }
+			function showMenu(element) {
+				var showMenu = document.body.getElementsByClassName("showMenu")[0];
+				if (showMenu.style.visibility == "visible") {
+					element.setAttribute("src", "Images/moreMenu.png");
+					showMenu.style.visibility = "hidden";
+					showMenu.style.display = "none";
+					return;
+				}
+				element.setAttribute("src", "Images/closeMenuIcon.png");
+				showMenu.style.visibility = "visible";
+				showMenu.style.display = "block";
+			}
 
-                for(let i=0; i<letters.length; i++) {    
-                    letters[i].className += " bounceIn";
-                    letters[i].style.visibility="visible";
-                    await sleep(50);
-                }
-            }
+			function imageChangeSrc(element, srcToChangeTo) {
+				element.setAttribute("src", srcToChangeTo);
+			}
 
-            function showMenu(element){
-                var showMenu = document.body.getElementsByClassName("showMenu")[0];
-                if(showMenu.style.visibility == "visible"){
-                    element.setAttribute("src", "Images/moreMenu.png");
-                    showMenu.style.visibility="hidden";
-                    showMenu.style.display="none";
-                    return;
-                }
-                element.setAttribute("src", "Images/closeMenuIcon.png");
-                showMenu.style.visibility="visible";
-                showMenu.style.display="block";
-            }
+			function showHoverText(element) {
+				var text = element.querySelector("#imageOnHoverText");
+				text.style.visibility = "visible";
+			}
 
-            function imageChangeSrc(element,srcToChangeTo){
-                element.setAttribute("src",srcToChangeTo);
-            }
+			function hideHoverText(element) {
+				var text = element.querySelector("#imageOnHoverText");
+				text.style.visibility = "hidden";
+			}
+		</script>
+	</head>
+	<body style="overflow-y: visible">
+		<div class="container">
+			<div id="hovertreecontainer" class="hoverTreeContainer">
+				<div>
+					<div class="headingLetterContainer">
+						<span class="headingLetter">H</span>
+						<span class="headingLetter">i</span>
+						<span class="headingLetter">,</span>
+						<br />
+						<span class="headingLetter">I</span>
+						<span class="headingLetter">'</span>
+						<span class="headingLetter">m</span>
+						&nbsp; &nbsp; &nbsp; &nbsp;
+						<span class="headingLetter">P</span>
+						<span class="headingLetter">a</span>
+						<span class="headingLetter">v</span>
+						<span class="headingLetter">e</span>
+						<span class="headingLetter">l</span>
+						<span class="headingLetter">,</span>
+						<br />
 
-        </script>
-    </head>
-    <body>
-        <div class="container">
-            <img class="showMenuButton" src="Images/moreMenu.png" onclick="showMenu(this)"/>
-            <div class="showMenu">
-                <div class="showMenuImageContainer">
-                    <img src = "Images/logo.png" class = "showMenuImage"/>
-                </div>
-                <div class = "showMenuHeading">Pavel</div>
-                <div class="showMenuSubHeading">Game Programmer</div>
+						<span class="headingLetter">g</span>
+						<span class="headingLetter">a</span>
+						<span class="headingLetter">m</span>
+						<span class="headingLetter">e</span>
+						&nbsp; &nbsp; &nbsp; &nbsp;
 
-                <ul class="showMenuList">
-                    <li class = "showMenuListElement">About</li>
-                    <li class = "showMenuListElement">My Skills</li>
-                    <li class = "showMenuListElement">Work</li>
-                    <li class = "showMenuListElement">Contact</li>
-                    <li class = "showMenuListElement">Blog</li>
-                    <div class="showMenuIcons">
-                        <a href="https://github.com/PavelKosik" style="visibility: hidden;"><img 
-                            src="Images/github.png" 
-                            class="showMenuIconElement" 
-                            onmouseover="imageChangeSrc(this,'Images/githubHover.png')" 
-                            onmouseout="imageChangeSrc(this,'Images/github.png')">
-                        </a>
+						<span class="headingLetter">p</span>
+						<span class="headingLetter">r</span>
+						<span class="headingLetter">o</span>
+						<span class="headingLetter">g</span>
+						<span class="headingLetter">r</span>
+						<span class="headingLetter">a</span>
+						<span class="headingLetter">m</span>
+						<span class="headingLetter">m</span>
+						<span class="headingLetter">e</span>
+						<span class="headingLetter">r</span>
+						<div class="smallText">Unity / Unreal Engine</div>
+						<button class="button">
+							<div class="buttonText">Contact me!</div>
+						</button>
 
-                        <a href="https://www.youtube.com/channel/UCwHl86YmfEdpqxvGKH7qbtw" style="visibility: hidden;"><img 
-                            src="Images/youtube.png" 
-                            class="showMenuIconElement" 
-                            onmouseover="imageChangeSrc(this,'Images/youtubeHover.png')" 
-                            onmouseout="imageChangeSrc(this,'Images/youtube.png')">
-                        </a>
-                    </div>
-                </ul>
-            </div>
-            <div class="headingLetterContainer">
-                <span class="headingLetter">H</span>
-                <span class="headingLetter">i</span>
-                <span class="headingLetter">,</span>
-                <br/>
-                <span class="headingLetter">I</span>
-                <span class="headingLetter">'</span>
-                <span class="headingLetter">m</span>    
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                <span class="headingLetter">P</span>
-                <span class="headingLetter">a</span>
-                <span class="headingLetter">v</span>
-                <span class="headingLetter">e</span>
-                <span class="headingLetter">l</span>
-                <span class="headingLetter">,</span>
-                <br/>
+						<div class="backgroundContainer">
+							<div class="backgroundContainerPosition">
+								<h2 class="heading">My portfolio</h2>
+								<div class="text">
+									A small showcase of projects I have worked on. Some were solo
+									projects and some were done with help of other people.
+									Interested to see more? Visit <a>my work</a> page.
+								</div>
+								<button class="button" style="margin-left: 10%">
+									<div class="buttonText">See more!</div>
+								</button>
+								<!--
+								<div class="gridContainer">
+									<div class="gridItem">
+										<button class="gridButton">
+											<img src="Images/RPGgame.png" class="gridImage" /></button
+										>My Graduation Project (RPG like game UE 5)
+									</div>
 
-                <span class="headingLetter">g</span>
-                <span class="headingLetter">a</span>
-                <span class="headingLetter">m</span>
-                <span class="headingLetter">e</span>
-                &nbsp;
-                &nbsp;
-                &nbsp;
-                &nbsp;
+									<div class="gridItem" onmouseover="showHoverText(this)" onmouseleave="hideHoverText(this)">
+										<button class="gridButton">
+											<div id="imageOnHoverText" class="imageOnHoverText">
+												Hello
+											</div>
+											<img
+												src="Images/TopDownShooter.png"
+												class="gridImage"
+											/></button
+										>Top Down Shooter Game UE 5
+									</div>
+									<div class="gridItem">
+										<button class="gridButton">
+											<img src="Images/clientUI.png" class="gridImage" /></button
+										>FrontEnd UI For Client UE 4
+									</div>
+									<div class="gridItem">
+										<button class="gridButton">
+											<img
+												src="Images/TowerDefenseGame.png"
+												class="gridImage"
+											/></button
+										>Tower Defense Game Unity
+									</div>
+								</div>
+                                //-->
 
-                <span class="headingLetter">p</span>
-                <span class="headingLetter">r</span>
-                <span class="headingLetter">o</span>
-                <span class="headingLetter">g</span>
-                <span class="headingLetter">r</span>
-                <span class="headingLetter">a</span>
-                <span class="headingLetter">m</span>
-                <span class="headingLetter">m</span>
-                <span class="headingLetter">e</span>
-                <span class="headingLetter">r</span>
+								<div style="color: white">
+									<ul style="list-style-type: none">
+										<li class="listItem">
+                                           
+											<button class="listButton">
+												<img src="Images/RPGgame.png" class="listImage" />
+                                              <div style="font-size: 10px">My Graduation Project</div> 
+                                              <span style="font-size: 10px; background-color: red;">C++</span>     
+                                              <span style="font-size: 10px">Unreal Engine 5</span> 
+                                              <span style="font-size: 10px">RPG</span> 
+											</button>
+                                           
+										</li>
+										<li>Top Down Shooter Game UE 5</li>
+										<li>FrontEnd UI For Client UE 4</li>
+										<li>Tower Defense Game Unity</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<h1 id="h1"></h1>
 
-            </div>
+						<h2 id="h2"></h2>
+						<h3 id="h2">
+							<a href="https://hovertree.com/hvtart/bjae/onxw4ahp.htm"></a>
+							<a href="https://hovertree.com/texiao/"></a>
+						</h3>
+						<p>&nbsp;</p>
+						<p>
+							<strong><a href="https://hovertree.com/"></a></strong>
+						</p>
 
-            <br/>
-            <br/>
-            <div class="smallText">Unity / Unreal Engine</div>
-            <button class="button"><div class="buttonText">Contact me!</div></button>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					</div>
+				</div>
+			</div>
 
-            <h2 class="heading">My portfolio</h2>
-        </div>
-    </body>
+			<img
+				class="showMenuButton"
+				src="Images/moreMenu.png"
+				onclick="showMenu(this)"
+			/>
+			<div class="showMenu">
+				<div class="showMenuImageContainer">
+					<img src="Images/logo.png" class="showMenuImage" />
+				</div>
+				<div class="showMenuHeading">Pavel</div>
+				<div class="showMenuSubHeading">Game Programmer</div>
+
+				<ul class="showMenuList">
+					<li class="showMenuListElement">About</li>
+					<li class="showMenuListElement">My Skills</li>
+					<li class="showMenuListElement">Work</li>
+					<li class="showMenuListElement">Contact</li>
+					<li class="showMenuListElement">Blog</li>
+					<div class="showMenuIcons">
+						<a href="https://github.com/PavelKosik" style="visibility: hidden"
+							><img
+								src="Images/github.png"
+								class="showMenuIconElement"
+								onmouseover="imageChangeSrc(this,'Images/githubHover.png')"
+								onmouseout="imageChangeSrc(this,'Images/github.png')"
+							/>
+						</a>
+
+						<a
+							href="https://www.youtube.com/channel/UCwHl86YmfEdpqxvGKH7qbtw"
+							style="visibility: hidden"
+							><img
+								src="Images/youtube.png"
+								class="showMenuIconElement"
+								onmouseover="imageChangeSrc(this,'Images/youtubeHover.png')"
+								onmouseout="imageChangeSrc(this,'Images/youtube.png')"
+							/>
+						</a>
+					</div>
+				</ul>
+			</div>
+
+			<br />
+			<br />
+
+			<div></div>
+		</div>
+
+		<canvas id="canvas" style="height: 100%"></canvas>
+		<script
+			type="text/javascript"
+			src="https://hovertree.com/texiao/html5/index/hovertreewelcome.js"
+		></script>
+		<script type="text/javascript"></script>
+		<script src="hoverTree.js"></script>
+	</body>
 </html>
