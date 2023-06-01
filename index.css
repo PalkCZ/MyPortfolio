@@ -419,7 +419,8 @@ canvas {
 	float: left;
 	width: 25%;
 	height: 100%;
-	margin: 16px 16px;
+	margin-right: 32px;
+	margin-bottom: 32px;
 }
 
 .listItem:hover {
