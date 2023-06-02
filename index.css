@@ -303,6 +303,7 @@
 }
 
 .text {
+	font-size: min(3vw, 16px);
 	display: inline-block;
 	color: white;
 	width: 65%;
