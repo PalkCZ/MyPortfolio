@@ -6,7 +6,7 @@
 
 .headingLetter {
 	color: white;
-	font-size: 7vw;
+	font-size: min(7vw, 64px);
 	font-weight: 600 !important;
 	transition: all 0.1s ease-in-out;
 	display: inline-block;
@@ -129,7 +129,7 @@
 .smallText {
 	font-family: "Poppins", cursive;
 	color: #515152;
-	font-size: 4vw;
+	font-size: min(4vw, 48px);
 }
 
 .button {
