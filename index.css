@@ -135,13 +135,11 @@
 .button {
 	color: #08fdd8;
 	border: 1px #08fdd8 solid;
-	text-align: center;
 	max-width: 225px;
 	height: 55px;
 	font-size: 14px;
 	font-weight: 200;
 	padding: 12px 12px;
-	position: relative;
 	background: none;
 	transition: color 0.4s linear;
 	position: relative;
@@ -298,10 +296,10 @@
 
 .heading {
 	color: #08fdd8;
-	font-size: 64px;
-	margin-top: 128px;
-	font-weight: 600 !important;
-	margin-bottom: 32px;
+	font-size: min(64px, 6.5vw);
+	margin-top: 10vw;
+	font-weight: 600;
+	margin-bottom: 2.5vw;
 }
 
 .text {
@@ -339,7 +337,7 @@ canvas {
 }
 
 .backgroundContainerPosition {
-	padding: 0px 64px;
+	padding: 0px 5vw;
 }
 
 .imageOnHoverText {
@@ -426,7 +424,7 @@ canvas {
 }
 
 .listTag {
-	font-size: 11px;
+	font-size: min(2vw, 12px);
 	font-weight: 400;
 	border-radius: 4px;
 	padding: 2px 2px;
@@ -434,5 +432,26 @@ canvas {
 
 .listProjectHeading {
 	font-weight: 600;
-	font-size: 16px;
+	font-size: min(3.5vw, 17px);
+}
+
+.seeMoreButton {
+	margin-left: 5vw;
+}
+
+.myPortfolioTextButtonPos {
+	align-content: center;
+	display: flex;
+}
+
+@media only screen and (max-width: 724px) {
+	.myPortfolioTextButtonPos {
+		display: block;
+	}
+
+	.seeMoreButton {
+		margin-top: 32px;
+		margin-left: 0;
+		left: 0;
+	}
 }
