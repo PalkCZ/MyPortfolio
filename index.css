@@ -2,6 +2,7 @@
 	/* background: #1d1d1d;*/
 	box-sizing: border-box;
 	font-family: "Arial", sans-serif;
+	scroll-behavior: smooth;
 }
 
 .headingLetter {
@@ -306,7 +307,7 @@
 	font-size: min(3vw, 16px);
 	display: inline-block;
 	color: white;
-	width: 65%;
+	width: 80%;
 }
 
 canvas {
@@ -389,9 +390,10 @@ canvas {
 
 .listImage {
 	width: 100%;
-	height: 75%;
+	height: 85%;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
+	margin-bottom: -0.25vw;
 }
 
 .listImage:hover {
@@ -425,7 +427,7 @@ canvas {
 }
 
 .listTag {
-	font-size: min(2vw, 12px);
+	font-size: min(2vw, 11px);
 	font-weight: 400;
 	border-radius: 4px;
 	padding: 2px 2px;
@@ -433,11 +435,11 @@ canvas {
 
 .listProjectHeading {
 	font-weight: 600;
-	font-size: min(3.5vw, 17px);
+	font-size: min(3.5vw, 16px);
 }
 
 .seeMoreButton {
-	margin-left: 5vw;
+	margin-left: 6vw;
 }
 
 .myPortfolioTextButtonPos {

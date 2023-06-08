@@ -12,52 +12,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Pavel Kosik | Game Programmer</title>
-		<script>
-			function sleep(ms) {
-				return new Promise((resolve) => setTimeout(resolve, ms));
-			}
-
-			window.onload = async function () {
-				var letters = document.body.getElementsByClassName("headingLetter");
-
-				for (let i = 0; i < letters.length; i++) {
-					letters[i].style.visibility = "hidden";
-				}
-
-				for (let i = 0; i < letters.length; i++) {
-					letters[i].className += " bounceIn";
-					letters[i].style.visibility = "visible";
-					await sleep(50);
-				}
-			};
-
-			function showMenu(element) {
-				var showMenu = document.body.getElementsByClassName("showMenu")[0];
-				if (showMenu.style.visibility == "visible") {
-					element.setAttribute("src", "Images/moreMenu.png");
-					showMenu.style.visibility = "hidden";
-					showMenu.style.display = "none";
-					return;
-				}
-				element.setAttribute("src", "Images/closeMenuIcon.png");
-				showMenu.style.visibility = "visible";
-				showMenu.style.display = "block";
-			}
-
-			function imageChangeSrc(element, srcToChangeTo) {
-				element.setAttribute("src", srcToChangeTo);
-			}
-
-			function showHoverText(element) {
-				var text = element.querySelector("#imageOnHoverText");
-				text.style.visibility = "visible";
-			}
-
-			function hideHoverText(element) {
-				var text = element.querySelector("#imageOnHoverText");
-				text.style.visibility = "hidden";
-			}
-		</script>
+		<script src="index.js"></script>
 	</head>
 	<body style="overflow-y: visible; background: #1d1d1d">
 		<div class="container">
@@ -98,10 +53,11 @@
 						<span class="headingLetter">e</span>
 						<span class="headingLetter">r</span>
 						<div class="smallText">Unreal Engine / Unity</div>
-						<button class="button" style="margin-top: 45px">
-							<div class="buttonText">Contact me!</div>
-						</button>
-
+						<a href="#Contact">
+							<button class="button" style="margin-top: 45px">
+								<div class="buttonText">Contact me!</div>
+							</button>
+						</a>
 						<div class="backgroundContainer">
 							<div class="backgroundContainerPosition">
 								<h2 class="heading">My portfolio</h2>
@@ -110,11 +66,18 @@
 										A small showcase of projects I have worked on. Some were
 										solo projects and some were done with help of other people.
 										Interested to see more? Visit
-										<a style="color: #08fdd8; cursor: pointer">my work</a> page.
+										<a
+											style="color: #08fdd8; cursor: pointer"
+											href="portfolio.html"
+											>my work</a
+										>
+										page.
 									</div>
-									<button class="button seeMoreButton">
-										<div class="buttonText">See more!</div>
-									</button>
+									<a href="portfolio.html" style="width: 65%">
+										<button class="button seeMoreButton">
+											<div class="buttonText">See more!</div>
+										</button>
+									</a>
 								</div>
 								<div>
 									<ul
@@ -134,8 +97,18 @@
 											<button class="listButton">
 												<img
 													src="Images/RPGgame.png"
-													class="listImage rounded"
+													class="listImage"
+													id="hide"
 												/>
+												<video
+													src="Videos/GraduationProjectThumbnailVideo.m4v"
+													autoplay
+													muted
+													class="listImage"
+													loop
+													style="display: none"
+													id="show"
+												></video>
 												<div class="imageOnHoverText" id="imageOnHoverText">
 													View Project
 												</div>
@@ -234,6 +207,16 @@
 										>
 											<button class="listButton">
 												<img src="Images/clientUI.png" class="listImage" />
+
+												<video
+													src="Videos/FrontEndForClientThumbnailVideo.m4v"
+													autoplay
+													muted
+													class="listImage"
+													loop
+													style="display: none"
+													id="show"
+												></video>
 												<div class="imageOnHoverText" id="imageOnHoverText">
 													View Project
 												</div>
@@ -284,7 +267,18 @@
 												<img
 													src="Images/TowerDefenseGame.png"
 													class="listImage"
+													id="hide"
 												/>
+
+												<video
+													src="Videos/TowerDefenseThumbnailVideo.mov"
+													autoplay
+													muted
+													class="listImage"
+													loop
+													style="display: none"
+													id="show"
+												></video>
 												<div class="imageOnHoverText" id="imageOnHoverText">
 													View Project
 												</div>
@@ -363,7 +357,16 @@
 										</ul>
 									</div>
 								</div>
-								<h2 class="heading">Contact me</h2>
+								<h2 class="heading" id="Contact">Contact me</h2>
+								<div class="text">
+									If you want to get in touch feel free to message me here
+									<a
+										style="color: #08fdd8"
+										href="mailto: pavelkosik.work@gmail.com"
+										>pavelkosik.work@gmail.com</a
+									>, I'll try to respond as quick as I can!
+								</div>
+								<div style="height: 150px"></div>
 							</div>
 						</div>
 

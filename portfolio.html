@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pavel Kosik | Portfolio</title>
+		<script src="index.js"></script>
+	</head>
+	<body style="overflow-y: visible; background: #1d1d1d">
+		<div class="backgroundContainer">
+			<div class="backgroundContainerPosition">
+				<h2 class="heading" style="margin-top: 0">My portfolio</h2>
+				<div class="myPortfolioTextButtonPos">
+					<div class="text">
+						A showcase of all the projects I have worked on. Some were solo
+						projects and some were done with help of other people.
+					</div>
+				</div>
+				<div>
+					<ul
+						style="
+							list-style-type: none;
+							height: 200px;
+							margin-bottom: 350px;
+							padding: 0 0;
+							margin-top: 64px;
+						"
+					>
+						<li
+							class="listItem"
+							onmouseover="showHoverText(this)"
+							onmouseleave="hideHoverText(this)"
+						>
+							<button class="listButton">
+								<img src="Images/RPGgame.png" class="listImage" id="hide" />
+								<video
+									src="Videos/GraduationProjectThumbnailVideo.m4v"
+									autoplay
+									muted
+									class="listImage"
+									loop
+									style="display: none"
+									id="show"
+								></video>
+								<div class="imageOnHoverText" id="imageOnHoverText">
+									View Project
+								</div>
+
+								<div class="listProjectHeading">My Graduation Project</div>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>C++</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Unreal Engine 5</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>RPG</span
+								>
+							</button>
+						</li>
+						<li
+							class="listItem"
+							onmouseover="showHoverText(this)"
+							onmouseleave="hideHoverText(this)"
+						>
+							<button class="listButton">
+								<img src="Images/TopDownShooter.png" class="listImage" />
+								<div class="imageOnHoverText" id="imageOnHoverText">
+									View Project
+								</div>
+								<div class="listProjectHeading">Top Down Shooter</div>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>C++</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Unreal Engine 5</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Shooter</span
+								>
+							</button>
+						</li>
+						<li
+							class="listItem"
+							onmouseover="showHoverText(this)"
+							onmouseleave="hideHoverText(this)"
+						>
+							<button class="listButton">
+								<img src="Images/clientUI.png" class="listImage" />
+
+								<video
+									src="Videos/FrontEndForClientThumbnailVideo.m4v"
+									autoplay
+									muted
+									class="listImage"
+									loop
+									style="display: none"
+									id="show"
+								></video>
+								<div class="imageOnHoverText" id="imageOnHoverText">
+									View Project
+								</div>
+								<div class="listProjectHeading">FrontEnd For Client</div>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>C++</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Unreal Engine 4</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>UI</span
+								>
+							</button>
+						</li>
+						<li
+							class="listItem"
+							onmouseover="showHoverText(this)"
+							onmouseleave="hideHoverText(this)"
+						>
+							<button class="listButton">
+								<img
+									src="Images/TowerDefenseGame.png"
+									class="listImage"
+									id="hide"
+								/>
+
+								<video
+									src="Videos/TowerDefenseThumbnailVideo.mov"
+									autoplay
+									muted
+									class="listImage"
+									loop
+									style="display: none"
+									id="show"
+								></video>
+								<div class="imageOnHoverText" id="imageOnHoverText">
+									View Project
+								</div>
+								<div class="listProjectHeading">Tower Defense</div>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>C#</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Unity</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Tower Defense</span
+								>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
