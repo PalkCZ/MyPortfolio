@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pavel Kosik | Portfolio</title>
+		<script src="index.js"></script>
+	</head>
+	<body style="overflow-y: visible; background: #1d1d1d">
+		<div class="backgroundContainer">
+			<div class="backgroundContainerPosition">
+				<h2 class="heading" style="margin-top: 0">My portfolio</h2>
+			</div>
+		</div>
+
+		<img
+			class="showMenuButton"
+			src="Images/moreMenu.png"
+			onclick="showMenu(this)"
+		/>
+		<div class="showMenu">
+			<div class="showMenuImageContainer">
+				<img src="Images/logo.png" class="showMenuImage" />
+			</div>
+			<div class="showMenuHeading">Pavel</div>
+			<div class="showMenuSubHeading">Game Programmer</div>
+
+			<ul class="showMenuList">
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html"
+					onclick="showMenu(this)"
+					><li>Home</li></a
+				>
+				<a
+					href="portfolio.html"
+					style="text-decoration: none"
+					class="showMenuListElement"
+					><li>Portfolio</li></a
+				>
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html#Skills"
+					onclick="showMenu(this)"
+					><li>Skills</li></a
+				>
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html#Contact"
+					onclick="showMenu(this)"
+					><li>Contact</li></a
+				>
+				<div class="showMenuIcons">
+					<a href="https://github.com/PavelKosik" style="visibility: hidden"
+						><img
+							src="Images/github.png"
+							class="showMenuIconElement"
+							onmouseover="imageChangeSrc(this,'Images/githubHover.png')"
+							onmouseout="imageChangeSrc(this,'Images/github.png')"
+						/>
+					</a>
+				</div>
+			</ul>
+		</div>
+	</body>
+</html>

@@ -204,9 +204,160 @@
 								>
 							</button>
 						</li>
+
+						<li
+							class="listItem"
+							onmouseover="showHoverText(this)"
+							onmouseleave="hideHoverText(this)"
+						>
+							<button class="listButton">
+								<img
+									src="Images/TowerDefenseGame.png"
+									class="listImage"
+									id="hide"
+								/>
+
+								<video
+									src="Videos/TowerDefenseThumbnailVideo.m4v"
+									autoplay
+									muted
+									class="listVideo"
+									loop
+									style="display: none"
+									id="show"
+								></video>
+								<div class="imageOnHoverText" id="imageOnHoverText">
+									View Project
+								</div>
+								<div class="listProjectHeading">Quit Game Templete</div>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>C#</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Unity</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Quiz</span
+								>
+							</button>
+						</li>
+
+						<li
+							class="listItem"
+							onmouseover="showHoverText(this)"
+							onmouseleave="hideHoverText(this)"
+						>
+							<button class="listButton">
+								<img
+									src="Images/TowerDefenseGame.png"
+									class="listImage"
+									id="hide"
+								/>
+
+								<video
+									src="Videos/TowerDefenseThumbnailVideo.m4v"
+									autoplay
+									muted
+									class="listVideo"
+									loop
+									style="display: none"
+									id="show"
+								></video>
+								<div class="imageOnHoverText" id="imageOnHoverText">
+									View Project
+								</div>
+								<div class="listProjectHeading">Infinite Runner Game</div>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>C#</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Unity</span
+								>
+								<span
+									class="listTag"
+									style="
+										background: linear-gradient(to right, #02aab0, #00cdac);
+									"
+									>Infinite Runner</span
+								>
+							</button>
+						</li>
 					</ul>
 				</div>
 			</div>
+		</div>
+
+		<img
+			class="showMenuButton"
+			src="Images/moreMenu.png"
+			onclick="showMenu(this)"
+		/>
+		<div class="showMenu">
+			<div class="showMenuImageContainer">
+				<img src="Images/logo.png" class="showMenuImage" />
+			</div>
+			<div class="showMenuHeading">Pavel</div>
+			<div class="showMenuSubHeading">Game Programmer</div>
+
+			<ul class="showMenuList">
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html"
+					onclick="showMenu(this)"
+					><li>Home</li></a
+				>
+				<a
+					href="portfolio.html"
+					style="text-decoration: none"
+					class="showMenuListElement"
+					><li>Portfolio</li></a
+				>
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html#Skills"
+					onclick="showMenu(this)"
+					><li>Skills</li></a
+				>
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html#Contact"
+					onclick="showMenu(this)"
+					><li>Contact</li></a
+				>
+				<div class="showMenuIcons">
+					<a href="https://github.com/PavelKosik" style="visibility: hidden"
+						><img
+							src="Images/github.png"
+							class="showMenuIconElement"
+							onmouseover="imageChangeSrc(this,'Images/githubHover.png')"
+							onmouseout="imageChangeSrc(this,'Images/github.png')"
+						/>
+					</a>
+				</div>
+			</ul>
 		</div>
 	</body>
 </html>

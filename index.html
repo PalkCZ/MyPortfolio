@@ -337,7 +337,7 @@
 										achieved in the best possible way.
 									</div>
 								</div>
-								<h2 class="heading">My skills</h2>
+								<h2 class="heading" id="Skills">My skills</h2>
 								<div class="text" style="width: 100%">
 									<div style="width: 33%; display: inline-block">
 										<h2>Languages</h2>
@@ -408,11 +408,33 @@
 				<div class="showMenuSubHeading">Game Programmer</div>
 
 				<ul class="showMenuList">
-					<li class="showMenuListElement">About</li>
-					<li class="showMenuListElement">My Skills</li>
-					<li class="showMenuListElement">Work</li>
-					<li class="showMenuListElement">Contact</li>
-					<li class="showMenuListElement">Blog</li>
+					<a
+						style="text-decoration: none"
+						class="showMenuListElement"
+						href="index.html"
+						onclick="showMenu(this)"
+						><li>Home</li></a
+					>
+					<a
+						href="portfolio.html"
+						style="text-decoration: none"
+						class="showMenuListElement"
+						><li>Portfolio</li></a
+					>
+					<a
+						style="text-decoration: none"
+						class="showMenuListElement"
+						href="index.html#Skills"
+						onclick="showMenu(this)"
+						><li>Skills</li></a
+					>
+					<a
+						style="text-decoration: none"
+						class="showMenuListElement"
+						href="index.html#Contact"
+						onclick="showMenu(this)"
+						><li>Contact</li></a
+					>
 					<div class="showMenuIcons">
 						<a href="https://github.com/PavelKosik" style="visibility: hidden"
 							><img
@@ -420,17 +442,6 @@
 								class="showMenuIconElement"
 								onmouseover="imageChangeSrc(this,'Images/githubHover.png')"
 								onmouseout="imageChangeSrc(this,'Images/github.png')"
-							/>
-						</a>
-
-						<a
-							href="https://www.youtube.com/channel/UCwHl86YmfEdpqxvGKH7qbtw"
-							style="visibility: hidden"
-							><img
-								src="Images/youtube.png"
-								class="showMenuIconElement"
-								onmouseover="imageChangeSrc(this,'Images/youtubeHover.png')"
-								onmouseout="imageChangeSrc(this,'Images/youtube.png')"
 							/>
 						</a>
 					</div>
