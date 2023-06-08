@@ -208,7 +208,7 @@
 
     function resize() {
         ctx.canvas.width = window.innerWidth;
-        ctx.canvas.height = window.innerHeight;
+        ctx.canvas.height = 1000;// window.innerHeight;
     }
 
     function start() {
@@ -223,6 +223,11 @@
     }
 
     function mousemove(event) {
+
+        if (event.clientY > 350) {
+            return;
+        }
+
         if (event.touches) {
             target.x = event.touches[0].pageX;
             target.y = event.touches[0].pageY;
