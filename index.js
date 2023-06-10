@@ -36,3 +36,7 @@ function hideHoverText(element) {
     var show = element.querySelector("#show");
     show.style.display = "none";
 }
+
+function loadPage(pageToLoad) {
+    window.location.href = pageToLoad;
+}

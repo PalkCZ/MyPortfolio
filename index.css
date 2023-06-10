@@ -471,3 +471,7 @@ canvas {
 	left: 0;
 	z-index: 100;
 }
+
+.heroVideoProjectPage {
+	height: 35vw;
+}
