@@ -40,3 +40,14 @@ function hideHoverText(element) {
 function loadPage(pageToLoad) {
     window.location.href = pageToLoad;
 }
+
+function rotateIcon(element) {
+    var icon = element.querySelector("#icon");
+    if (icon.style.transform == "rotate(45deg)") {
+        icon.style.transform = "rotate(90deg)";
+    }
+
+    else {
+        icon.style.transform = "rotate(45deg)"
+    }
+}

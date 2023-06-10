@@ -13,21 +13,156 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Pavel Kosik | Graduation Project Page</title>
 		<script src="index.js"></script>
+		<script
+			src="https://kit.fontawesome.com/bba4a8722b.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body style="overflow-y: visible; background: #1d1d1d">
 		<div class="backgroundContainer">
 			<div class="backgroundContainerPosition">
-				<h2 class="heading" style="margin-top: 0">Graduation Project</h2>
+				<h2 class="heading" style="margin-top: 0; text-align: center">
+					Graduation Project
+				</h2>
+				<div class="projectShortDescription">
+					<table style="margin: auto; text-align: left; margin-bottom: 32px">
+						<tbody>
+							<tr>
+								<td style="padding: 10px"><strong>Project Type</strong></td>
+								<td style="padding: 10px">School / Solo Project</td>
+							</tr>
+
+							<tr>
+								<td style="padding: 10px"><strong>Software Used</strong></td>
+								<td style="padding: 10px">Unreal Engine 5</td>
+							</tr>
+
+							<tr>
+								<td style="padding: 10px"><strong>Languages Used</strong></td>
+								<td style="padding: 10px">C++ / Blueprints</td>
+							</tr>
+
+							<tr>
+								<td style="padding: 10px"><strong>Primary Role(s)</strong></td>
+								<td style="padding: 10px">Everything</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p>
+					This was a one person project I done in school to graduate during my
+					last year at
+					<a
+						href="https://www.sps-pi.cz/"
+						style="color: #08fdd8; text-decoration: none"
+						>SPŠ PI.</a
+					>&nbsp; The main focus of the project was to create RPG like computer
+					game in Unreal Engine 5.
+				</p>
 				<video
 					src="Videos/GraduationProjectThumbnailVideo.m4v"
 					autoplay
 					muted
 					loop
-					class="heroVideoProjectPage"
+					style="
+						height: 600px;
+						margin: auto;
+						align-content: center;
+						position: relative;
+						display: flex;
+					"
 				></video>
+				<div style="margin-top: 32px">
+					<button class="accordionProjectPage" onclick="rotateIcon(this)">
+						<i
+							class="fa-solid fa-person-walking"
+							style="margin-right: 0.6vw; width: 1.5vw"
+						></i>
+						Player Movement<i
+							class="fa fa-times"
+							aria-hidden="true"
+							style="
+								position: absolute;
+								right: 16px;
+								transform: rotate(45deg);
+								transition: 0.4s;
+							"
+							id="icon"
+						></i>
+					</button>
+
+					<div class="panelProjectPage">
+						<p>Lorem ipsum...</p>
+					</div>
+
+					<button class="accordionProjectPage" onclick="rotateIcon(this)">
+						<i
+							class="fa-solid fa-shield-halved"
+							style="margin-right: 0.6vw; width: 1.5vw"
+						></i>
+						Combat System<i
+							class="fa fa-times"
+							aria-hidden="true"
+							style="
+								position: absolute;
+								right: 16px;
+								transform: rotate(45deg);
+								transition: 0.4s;
+							"
+							id="icon"
+						></i>
+					</button>
+
+					<div class="panelProjectPage">
+						<p>Lorem ipsum...</p>
+					</div>
+
+					<button class="accordionProjectPage" onclick="rotateIcon(this)">
+						<i
+							class="fa-solid fa-skull"
+							style="margin-right: 0.6vw; width: 1.5vw"
+						></i>
+						Enemy Characters<i
+							class="fa fa-times"
+							aria-hidden="true"
+							style="
+								position: absolute;
+								right: 16px;
+								transform: rotate(45deg);
+								transition: 0.4s;
+							"
+							id="icon"
+						></i>
+					</button>
+
+					<div class="panelProjectPage">
+						<p>Lorem ipsum...</p>
+					</div>
+
+					<button class="accordionProjectPage" onclick="rotateIcon(this)">
+						<i
+							class="fa-solid fa-desktop"
+							style="margin-right: 0.6vw; width: 1.5vw"
+						></i>
+						User Interface<i
+							class="fa fa-times"
+							aria-hidden="true"
+							style="
+								position: absolute;
+								right: 16px;
+								transform: rotate(45deg);
+								transition: 0.4s;
+							"
+							id="icon"
+						></i>
+					</button>
+
+					<div class="panelProjectPage">
+						<p>Lorem ipsum...</p>
+					</div>
+				</div>
 			</div>
 		</div>
-
 		<img
 			class="showMenuButton"
 			src="Images/moreMenu.png"
@@ -80,5 +215,21 @@
 				</div>
 			</ul>
 		</div>
+
+		<script>
+			var acc = document.getElementsByClassName("accordionProjectPage");
+
+			for (let i = 0; i < acc.length; i++) {
+				acc[i].addEventListener("click", function () {
+					this.classList.toggle("activeProjectPage");
+					var panel = this.nextElementSibling;
+					if (panel.style.maxHeight) {
+						panel.style.maxHeight = null;
+					} else {
+						panel.style.maxHeight = panel.scrollHeight + "px";
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
