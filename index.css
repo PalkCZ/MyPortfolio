@@ -28,6 +28,7 @@
 	text-align: left;
 	padding: 16px 5vw;
 	user-select: none;
+	margin-top: 2vw;
 }
 
 .container {
@@ -128,7 +129,7 @@
 }
 
 .smallText {
-	font-family: "Poppins", cursive;
+	font-family: "Arial", cursive;
 	color: #515152;
 	font-size: min(4vw, 48px);
 }
@@ -185,6 +186,7 @@
 	height: 3.4vw;
 	z-index: 1001;
 	background: transparent;
+	display: none;
 }
 
 .showMenuButton:hover {
@@ -217,7 +219,7 @@
 .showMenuImage {
 	width: 50px;
 	height: 50px;
-	display: block;
+	display: none;
 	background-color: transparent;
 	/* justify-content: center;
     align-items: center;*/
@@ -308,6 +310,7 @@
 	display: inline-block;
 	color: white;
 	width: 80%;
+	margin-left: 0.65vw;
 }
 
 canvas {
@@ -458,6 +461,14 @@ canvas {
 		margin-left: 0;
 		left: 0;
 	}
+
+	.showMenuButton {
+		display: block;
+	}
+
+	.navbarContainer {
+		display: none !important;
+	}
 }
 
 .listVideo {
@@ -485,6 +496,7 @@ canvas {
 .projectShortDescription {
 	color: white;
 	text-align: center;
+	font-size: min(3vw, 18px);
 }
 
 .accordionProjectPage {
@@ -507,9 +519,72 @@ canvas {
 }
 
 .panelProjectPage {
-	padding: 0px 36px;
-	background-color: #3e3d3d;
+	margin: 1vw 1vw;
 	max-height: 0;
 	overflow: hidden;
-	transition: max-height 0.2s ease-out;
+	transition: max-height 0.25s cubic-bezier(0, 1, 0, 1);
+	background: transparent;
+}
+
+.navbarContainer {
+	top: 0;
+	z-index: 1000;
+	position: fixed;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: rgba(24, 24, 24, 0.85);
+	margin: 0;
+}
+
+.navbarList {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	float: left;
+	display: flex;
+}
+
+.navbarElement {
+	float: left;
+	margin: auto;
+	width: fit-content;
+	padding: 1vw 3vw;
+	color: white;
+	height: 100%;
+	align-self: center;
+}
+
+.navbarElement:hover {
+	background-color: #02aab0;
+	cursor: pointer;
+}
+
+.navbarElementName {
+	float: left;
+	margin: auto;
+	width: fit-content;
+	padding: 1vw 3vw;
+	color: white;
+	font-weight: 600;
+	font-size: 2vw;
+	align-self: center;
+}
+
+.navbarElementName:hover {
+	color: #08fdd8;
+	cursor: pointer;
+}
+
+.icon {
+	margin: 0px 4px;
+}
+
+.icon:hover {
+	color: #08fdd8 !important;
+}
+
+.iconAccondation {
+	margin-right: min(8px, 3vw);
 }

@@ -51,3 +51,15 @@ function rotateIcon(element) {
         icon.style.transform = "rotate(45deg)"
     }
 }
+
+function scrollToTargetAdjusted(target) {
+    var element = document.getElementById(target);
+    var headerOffset = 50;
+    var elementPosition = element.getBoundingClientRect().top;
+    var offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+    });
+}

@@ -13,6 +13,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Pavel Kosik | Game Programmer</title>
 		<script src="index.js"></script>
+		<script
+			src="https://kit.fontawesome.com/bba4a8722b.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
 	<body style="overflow-y: visible; background: #1d1d1d">
 		<div class="container">
@@ -60,24 +64,14 @@
 						</a>
 						<div class="backgroundContainer">
 							<div class="backgroundContainerPosition">
-								<h2 class="heading">My portfolio</h2>
+								<h2 class="heading" id="Portfolio">My portfolio</h2>
 								<div class="myPortfolioTextButtonPos">
 									<div class="text">
-										A small showcase of projects I have worked on. Some were
+										A showcase of all the projects I have worked on. Some were
 										solo projects and some were done with help of other people.
-										Interested to see more? Visit
-										<a
-											style="color: #08fdd8; cursor: pointer"
-											href="portfolio.html"
-											>my work</a
-										>
-										page.
+										If any projects catches your eye you can read more about it
+										by clicking on the image.
 									</div>
-									<a href="portfolio.html" style="width: 65%">
-										<button class="button seeMoreButton">
-											<div class="buttonText">See more!</div>
-										</button>
-									</a>
 								</div>
 								<div>
 									<ul
@@ -94,7 +88,10 @@
 											onmouseover="showHoverText(this)"
 											onmouseleave="hideHoverText(this)"
 										>
-											<button class="listButton">
+											<button
+												class="listButton"
+												onclick="loadPage('myGraduationProjectPage.html')"
+											>
 												<img
 													src="Images/RPGgame.png"
 													class="listImage"
@@ -322,10 +319,134 @@
 												>
 											</button>
 										</li>
+
+										<li
+											class="listItem"
+											onmouseover="showHoverText(this)"
+											onmouseleave="hideHoverText(this)"
+										>
+											<button class="listButton">
+												<img
+													src="Images/QuizGame.png"
+													class="listImage"
+													id="hide"
+												/>
+
+												<video
+													src="Videos/QuizTemplateThumbnailVideo.mov"
+													autoplay
+													muted
+													class="listVideo"
+													loop
+													style="display: none"
+													id="show"
+												></video>
+												<div class="imageOnHoverText" id="imageOnHoverText">
+													View Project
+												</div>
+												<div class="listProjectHeading">Quit Game Templete</div>
+												<span
+													class="listTag"
+													style="
+														background: linear-gradient(
+															to right,
+															#02aab0,
+															#00cdac
+														);
+													"
+													>C#</span
+												>
+												<span
+													class="listTag"
+													style="
+														background: linear-gradient(
+															to right,
+															#02aab0,
+															#00cdac
+														);
+													"
+													>Unity</span
+												>
+												<span
+													class="listTag"
+													style="
+														background: linear-gradient(
+															to right,
+															#02aab0,
+															#00cdac
+														);
+													"
+													>Quiz</span
+												>
+											</button>
+										</li>
+
+										<li
+											class="listItem"
+											onmouseover="showHoverText(this)"
+											onmouseleave="hideHoverText(this)"
+										>
+											<button class="listButton">
+												<img
+													src="Images/InfiniteRunner.png"
+													class="listImage"
+													id="hide"
+												/>
+
+												<video
+													src="Videos/InfiniteRunnerThumbnailVideo.m4v"
+													autoplay
+													muted
+													class="listVideo"
+													loop
+													style="display: none"
+													id="show"
+												></video>
+												<div class="imageOnHoverText" id="imageOnHoverText">
+													View Project
+												</div>
+												<div class="listProjectHeading">
+													Infinite Runner Game
+												</div>
+												<span
+													class="listTag"
+													style="
+														background: linear-gradient(
+															to right,
+															#02aab0,
+															#00cdac
+														);
+													"
+													>C#</span
+												>
+												<span
+													class="listTag"
+													style="
+														background: linear-gradient(
+															to right,
+															#02aab0,
+															#00cdac
+														);
+													"
+													>Unity</span
+												>
+												<span
+													class="listTag"
+													style="
+														background: linear-gradient(
+															to right,
+															#02aab0,
+															#00cdac
+														);
+													"
+													>Infinite Runner</span
+												>
+											</button>
+										</li>
 									</ul>
 								</div>
 								<div>
-									<h2 class="heading">Me, myself and I</h2>
+									<h2 class="heading" id="About">Me, myself and I</h2>
 									<div class="text">
 										Hello my name is Pavel Kosík and I am a game programmer from
 										the Czech Republic. Next semester I will start bachelor
@@ -370,7 +491,46 @@
 										>pavelkosik.work@gmail.com</a
 									>, I'll try to respond as quick as I can!
 								</div>
-								<div style="height: 150px"></div>
+							</div>
+							<div
+								style="
+									width: 100%;
+									text-align: center;
+									background-color: #515152;
+									height: 45px;
+									margin-top: 45px;
+								"
+							>
+								<p
+									style="
+										font-size: 16px;
+										margin: auto;
+										position: relative;
+										top: 50%;
+										transform: translateY(-50%);
+									"
+								>
+									Copyright © 2023 by Pavel Kosík
+									<a
+										href="https://github.com/PavelKosik"
+										style="visibility: visible"
+									>
+										<i
+											class="fa-brands fa-github icon"
+											style="color: #ffffff"
+										></i
+									></a>
+
+									<a
+										href="mailto:pavelkosik@gmail.com"
+										style="visibility: visible"
+									>
+										<i
+											class="fa-brands fa-google icon"
+											style="color: #ffffff"
+										></i>
+									</a>
+								</p>
 							</div>
 						</div>
 
@@ -393,6 +553,65 @@
 						<p>&nbsp;</p>
 					</div>
 				</div>
+			</div>
+
+			<div class="navbarContainer">
+				<ul class="navbarList">
+					<a
+						onclick="scrollToTargetAdjusted('hovertreecontainer')"
+						style="text-decoration: none"
+						class="navbarElementName"
+						><li>PAVEL KOSÍK</li></a
+					>
+
+					<a
+						onclick="scrollToTargetAdjusted('Portfolio')"
+						style="text-decoration: none"
+						class="navbarElement"
+						><li>
+							<i class="fa-solid fa-gamepad" style="margin: 0 0.5vw"></i>
+							Portfolio
+						</li></a
+					>
+
+					<a
+						onclick="scrollToTargetAdjusted('About')"
+						style="text-decoration: none"
+						class="navbarElement"
+						><li>
+							<i class="fa-solid fa-info" style="margin: 0 0.5vw"></i>About
+						</li></a
+					>
+
+					<a
+						onclick="scrollToTargetAdjusted('Skills')"
+						style="text-decoration: none"
+						class="navbarElement"
+						><li>
+							<i class="fa-solid fa-brain" style="margin: 0 0.5vw"></i>Skills
+						</li></a
+					>
+					<a
+						onclick="scrollToTargetAdjusted('Contact')"
+						style="text-decoration: none"
+						class="navbarElement"
+						><li style="align-items: center">
+							<i class="fa-solid fa-comments" style="margin: 0 0.5vw"></i
+							>Contact
+						</li></a
+					>
+
+					<a
+						style="text-decoration: none"
+						class="navbarElement"
+						href="index.html#Contact"
+					>
+						<li>
+							<i class="fa-solid fa-file-lines" style="margin: 0 0.5vw"></i
+							>Résumé
+						</li></a
+					>
+				</ul>
 			</div>
 
 			<img
