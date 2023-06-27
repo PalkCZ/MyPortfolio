@@ -17,6 +17,16 @@
 			src="https://kit.fontawesome.com/bba4a8722b.js"
 			crossorigin="anonymous"
 		></script>
+
+		<script>
+			window.addEventListener("load", function () {
+				console.log(sessionStorage.getItem("loadElement"));
+				if (sessionStorage.getItem("loadElement") == null) {
+					return;
+				}
+				scrollToTargetAdjustedBody();
+			});
+		</script>
 	</head>
 	<body style="overflow-y: visible; background: #1d1d1d">
 		<div class="container">
@@ -93,7 +103,7 @@
 												onclick="loadPage('myGraduationProjectPage.html')"
 											>
 												<img
-													src="Images/RPGgame.png"
+													src="Images/PortfolioThumbnails/RPGgame.png"
 													class="listImage"
 													id="hide"
 												/>
@@ -153,9 +163,12 @@
 											onmouseover="showHoverText(this)"
 											onmouseleave="hideHoverText(this)"
 										>
-											<button class="listButton">
+											<button
+												class="listButton"
+												onclick="loadPage('topDownShooterProjectPage.html')"
+											>
 												<img
-													src="Images/TopDownShooter.png"
+													src="Images/PortfolioThumbnails/TopDownShooter.png"
 													class="listImage"
 												/>
 												<div class="imageOnHoverText" id="imageOnHoverText">
@@ -202,9 +215,12 @@
 											onmouseover="showHoverText(this)"
 											onmouseleave="hideHoverText(this)"
 										>
-											<button class="listButton">
+											<button
+												class="listButton"
+												onclick="loadPage('frontEndForClientProjectPage.html')"
+											>
 												<img
-													src="Images/clientUI.png"
+													src="Images/PortfolioThumbnails/clientUI.png"
 													class="listImage"
 													id="hide"
 												/>
@@ -222,7 +238,7 @@
 													View Project
 												</div>
 												<div class="listProjectHeading">
-													FrontEnd For Client
+													Frontend For Client
 												</div>
 												<span
 													class="listTag"
@@ -266,7 +282,7 @@
 										>
 											<button class="listButton">
 												<img
-													src="Images/TowerDefenseGame.png"
+													src="Images/PortfolioThumbnails/TowerDefenseGame.png"
 													class="listImage"
 													id="hide"
 												/>
@@ -327,7 +343,7 @@
 										>
 											<button class="listButton">
 												<img
-													src="Images/QuizGame.png"
+													src="Images/PortfolioThumbnails/QuizGame.png"
 													class="listImage"
 													id="hide"
 												/>
@@ -388,7 +404,7 @@
 										>
 											<button class="listButton">
 												<img
-													src="Images/InfiniteRunner.png"
+													src="Images/PortfolioThumbnails/InfiniteRunner.png"
 													class="listImage"
 													id="hide"
 												/>
@@ -496,7 +512,7 @@
 								style="
 									width: 100%;
 									text-align: center;
-									background-color: #515152;
+									background-color: #39393a;
 									height: 45px;
 									margin-top: 45px;
 								"
@@ -601,16 +617,26 @@
 						</li></a
 					>
 
-					<a
-						style="text-decoration: none"
-						class="navbarElement"
-						href="index.html#Contact"
-					>
+					<div style="text-decoration: none" class="navbarElement">
 						<li>
 							<i class="fa-solid fa-file-lines" style="margin: 0 0.5vw"></i
 							>Résumé
-						</li></a
-					>
+						</li>
+						<div class="resumeDropdown">
+							<a
+								href="Resume/CV_Kosik_Czech.pdf"
+								download="CV_Kosik_Czech"
+								style="color: white"
+								>Czech</a
+							>
+							<a
+								href="Resume/CV_Kosik_English.pdf"
+								download="CV_Kosik_English"
+								style="color: white"
+								>English</a
+							>
+						</div>
+					</div>
 				</ul>
 			</div>
 

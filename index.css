@@ -547,13 +547,17 @@ canvas {
 }
 
 .navbarElement {
-	float: left;
+	/*float: left;*/
+	position: relative;
 	margin: auto;
 	width: fit-content;
 	padding: 1vw 3vw;
 	color: white;
 	height: 100%;
 	align-self: center;
+	display: inline-block;
+	background: none;
+	border: none;
 }
 
 .navbarElement:hover {
@@ -587,4 +591,27 @@ canvas {
 
 .iconAccondation {
 	margin-right: min(8px, 3vw);
+}
+
+.resumeDropdown {
+	position: absolute;
+	min-width: 160px;
+	display: none;
+	left: 0%;
+	margin-top: 12px;
+}
+
+.resumeDropdown a {
+	background-color: #282828;
+	padding: 16px;
+	text-decoration: none;
+	display: block;
+}
+
+.resumeDropdown a:hover {
+	background-color: #02aab0;
+}
+
+.navbarElement:hover > .resumeDropdown {
+	display: inline-block;
 }

@@ -53,7 +53,26 @@ function rotateIcon(element) {
 }
 
 function scrollToTargetAdjusted(target) {
-    var element = document.getElementById(target);
+
+    if (!window.location.href.includes("index.html")) {
+        sessionStorage.setItem("loadElement", target);
+        window.location.href = "index.html";
+    }
+    else {
+        var element = document.getElementById(target);
+        var headerOffset = 50;
+        var elementPosition = element.getBoundingClientRect().top;
+        var offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+        });
+    }
+}
+
+function scrollToTargetAdjustedBody() {
+    var element = document.getElementById(sessionStorage.getItem("loadElement"));
     var headerOffset = 50;
     var elementPosition = element.getBoundingClientRect().top;
     var offsetPosition = elementPosition + window.scrollY - headerOffset;
@@ -62,4 +81,6 @@ function scrollToTargetAdjusted(target) {
         top: offsetPosition,
         behavior: "smooth"
     });
+
+    sessionStorage.setItem("loadElement", null);
 }
