@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="stylesheet" href="index.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Pavel Kosík | Tower Defense Project Page</title>
+		<script src="index.js"></script>
+		<script
+			src="https://kit.fontawesome.com/bba4a8722b.js"
+			crossorigin="anonymous"
+		></script>
+		<link rel="stylesheet" type="text/css" href="prism.css" />
+		<script src="prism.js"></script>
+		<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+	</head>
+	<body style="overflow-y: visible; background: #1d1d1d">
+		<div class="backgroundContainer">
+			<div class="backgroundContainerPosition">
+				<h2 class="heading" style="margin-top: 150px; text-align: center">
+					Tower Defense Project
+				</h2>
+				<div class="projectShortDescription">
+					<table style="margin: auto; text-align: left; margin-bottom: 32px">
+						<tbody>
+							<tr>
+								<td style="padding: 10px"><strong>Project Type</strong></td>
+								<td style="padding: 10px">2 people project</td>
+							</tr>
+
+							<tr>
+								<td style="padding: 10px"><strong>Software Used</strong></td>
+								<td style="padding: 10px">Unity</td>
+							</tr>
+
+							<tr>
+								<td style="padding: 10px"><strong>Languages Used</strong></td>
+								<td style="padding: 10px">C#</td>
+							</tr>
+
+							<tr>
+								<td style="padding: 10px"><strong>Primary Role(s)</strong></td>
+								<td style="padding: 10px">/Programmer</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<p style="font-size: min(3vw, 16px)">
+					This project was done as a collaboration with a graphic artist to
+					create something in Unity where we could both showcase our skills. The
+					game is a typical tower defense game. All the game code was done by
+					me. The following sections contain snippets of code but not all of it.
+					If you want to check out all of it you can do so
+					<a
+						href="https://github.com/PavelKosik/Unity-Tower-defense"
+						style="color: #08fdd8; text-decoration: none"
+						>here.</a
+					>
+				</p>
+				<video
+					src="Videos/TowerDefenseThumbnailVideo.m4v"
+					autoplay
+					muted
+					loop
+					style="
+						width: 90%;
+						margin: auto;
+						align-content: center;
+						position: relative;
+						display: flex;
+					"
+				></video>
+				<div style="margin-top: 32px">
+					<button class="accordionProjectPage" onclick="rotateIcon(this)">
+						<i class="fa-brands fa-figma iconAccondation"></i>
+						UI Design<i
+							class="fa fa-times"
+							aria-hidden="true"
+							style="
+								position: absolute;
+								right: 16px;
+								transform: rotate(45deg);
+								transition: 0.4s;
+							"
+							id="icon"
+						></i>
+					</button>
+
+					<div class="panelProjectPage">
+						<p>
+							I got a design to take a reference from in a Figma project client
+							showed me. But because it was just a reference I had to design the
+							UI mostly on my own with client giving the feedback. After a few
+							tries we agreed on UI he liked and I implemented that.
+						</p>
+
+						<button class="accordionProjectPage" onclick="rotateIcon(this)">
+							<i class="fa-solid fa-desktop iconAccondation"></i>
+							UI Showcase<i
+								class="fa fa-times"
+								aria-hidden="true"
+								style="
+									position: absolute;
+									right: 16px;
+									transform: rotate(45deg);
+									transition: 0.4s;
+								"
+								id="icon"
+							></i>
+						</button>
+						<div class="panelProjectPage">
+							<p>
+								The following images show the UI I designed in Unreal Engine 4.
+								The buttons have hover effects which are shown too.
+							</p>
+
+							<img
+								src="Images/FrontendForClientProjectPage/uishowcase1.png"
+								style="margin-top: 8px; margin-bottom: 8px"
+							/>
+							<br />
+							<img
+								src="Images/FrontendForClientProjectPage/uishowcase2.png"
+								style="margin-top: 8px; margin-bottom: 8px"
+							/>
+							<br />
+
+							<img
+								src="Images/FrontendForClientProjectPage/uishowcase3.png"
+								style="margin-top: 8px; margin-bottom: 8px"
+							/>
+							<br />
+
+							<img
+								src="Images/FrontendForClientProjectPage/uishowcase4.png"
+								style="margin-top: 8px; margin-bottom: 8px"
+							/>
+							<br />
+
+							<img
+								src="Images/FrontendForClientProjectPage/uishowcase5.png"
+								style="margin-top: 8px; margin-bottom: 8px"
+							/>
+							<br />
+
+							<img
+								src="Images/FrontendForClientProjectPage/uishowcase6.png"
+								style="margin-top: 8px; margin-bottom: 8px"
+							/>
+						</div>
+					</div>
+					<button class="accordionProjectPage" onclick="rotateIcon(this)">
+						<i class="fa-solid fa-desktop iconAccondation"></i>
+						UI Implementation<i
+							class="fa fa-times"
+							aria-hidden="true"
+							style="
+								position: absolute;
+								right: 16px;
+								transform: rotate(45deg);
+								transition: 0.4s;
+							"
+							id="icon"
+						></i>
+					</button>
+
+					<div class="panelProjectPage">
+						<p>
+							The implementation after designing the UI was pretty
+							straightforward and easy because I was supposed to only make the
+							frontend. So all the implementation I had to do was to make sure
+							that the UI is responsive and works well.
+						</p>
+
+						<button
+							class="accordionProjectPage"
+							onclick="rotateIcon(this)"
+							style="padding: 1vw 4vw"
+						>
+							<i class="fa-solid fa-code iconAccondation"></i>Code Snippets<i
+								class="fa fa-times"
+								aria-hidden="true"
+								style="
+									position: absolute;
+									right: 16px;
+									transform: rotate(45deg);
+									transition: 0.4s;
+								"
+								id="icon"
+							></i>
+						</button>
+
+						<div class="panelProjectPage">
+							<p>
+								The following code snippet shows that camera movement is done by
+								rotation of the camera. The only difference between horizontal
+								and vertical is the axis they affect. InvertedMouse can be only
+								1 or -1 based on if the mouse is set as inverted or not.
+							</p>
+
+							<pre class="line-numbers">
+<code class="language-cpp">void AMyPlayer::CameraHorizontal(float horizontal) {
+	if (!lockedOnEnemy) {
+		cameraAttach->AddLocalRotation(FRotator(0, cameraRotationSpeed * horizontal, 0));
+	}
+}
+
+void AMyPlayer::CameraVertical(float vertical) {
+	if (!lockedOnEnemy) {
+		cameraAttach->AddLocalRotation(FRotator(cameraRotationSpeed * vertical * invertedMouse, 0, 0));
+	}
+}
+									</code></pre>
+						</div>
+
+						<button
+							class="accordionProjectPage"
+							onclick="rotateIcon(this)"
+							style="padding: 1vw 4vw"
+						>
+							<i class="fa-solid fa-map iconAccondation"></i>Blueprint Snippet<i
+								class="fa fa-times"
+								aria-hidden="true"
+								style="
+									position: absolute;
+									right: 16px;
+									transform: rotate(45deg);
+									transition: 0.4s;
+								"
+								id="icon"
+							></i>
+						</button>
+						<div class="panelProjectPage">
+							<p>The following</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div
+				style="
+					width: 100%;
+					text-align: center;
+					background-color: #39393a;
+					height: 45px;
+					margin-top: 45px;
+				"
+			>
+				<p
+					style="
+						font-size: 16px;
+						margin: auto;
+						position: relative;
+						top: 50%;
+						transform: translateY(-50%);
+					"
+				>
+					Copyright © 2023 by Pavel Kosík
+					<a href="https://github.com/PavelKosik" style="visibility: visible">
+						<i class="fa-brands fa-github icon" style="color: #ffffff"></i
+					></a>
+
+					<a href="mailto:pavelkosik@gmail.com" style="visibility: visible">
+						<i class="fa-brands fa-google icon" style="color: #ffffff"></i>
+					</a>
+				</p>
+			</div>
+		</div>
+
+		<div class="navbarContainer">
+			<ul class="navbarList">
+				<a
+					onclick="scrollToTargetAdjusted('hovertreecontainer')"
+					style="text-decoration: none"
+					class="navbarElementName"
+					><li>PAVEL KOSÍK</li></a
+				>
+
+				<a
+					onclick="scrollToTargetAdjusted('Portfolio')"
+					style="text-decoration: none"
+					class="navbarElement"
+					><li>
+						<i class="fa-solid fa-gamepad" style="margin: 0 0.5vw"></i>
+						Portfolio
+					</li></a
+				>
+
+				<a
+					onclick="scrollToTargetAdjusted('About')"
+					style="text-decoration: none"
+					class="navbarElement"
+					><li>
+						<i class="fa-solid fa-info" style="margin: 0 0.5vw"></i>About
+					</li></a
+				>
+
+				<a
+					onclick="scrollToTargetAdjusted('Skills')"
+					style="text-decoration: none"
+					class="navbarElement"
+					><li>
+						<i class="fa-solid fa-brain" style="margin: 0 0.5vw"></i>Skills
+					</li></a
+				>
+				<a
+					onclick="scrollToTargetAdjusted('Contact')"
+					style="text-decoration: none"
+					class="navbarElement"
+					><li style="align-items: center">
+						<i class="fa-solid fa-comments" style="margin: 0 0.5vw"></i>Contact
+					</li></a
+				>
+
+				<div style="text-decoration: none" class="navbarElement">
+					<li>
+						<i class="fa-solid fa-file-lines" style="margin: 0 0.5vw"></i>Résumé
+					</li>
+					<div class="resumeDropdown">
+						<a
+							href="Resume/CV_Kosik_Czech.pdf"
+							download="CV_Kosik_Czech"
+							style="color: white"
+							>Czech</a
+						>
+						<a
+							href="Resume/CV_Kosik_English.pdf"
+							download="CV_Kosik_English"
+							style="color: white"
+							>English</a
+						>
+					</div>
+				</div>
+			</ul>
+		</div>
+
+		<img
+			class="showMenuButton"
+			src="Images/moreMenu.png"
+			onclick="showMenu(this)"
+		/>
+		<div class="showMenu">
+			<div class="showMenuImageContainer">
+				<img src="Images/logo.png" class="showMenuImage" />
+			</div>
+			<div class="showMenuHeading">Pavel</div>
+			<div class="showMenuSubHeading">Game Programmer</div>
+
+			<ul class="showMenuList">
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html"
+					onclick="showMenu(this)"
+					><li>Home</li></a
+				>
+				<a
+					href="portfolio.html"
+					style="text-decoration: none"
+					class="showMenuListElement"
+					><li>Portfolio</li></a
+				>
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html#Skills"
+					onclick="showMenu(this)"
+					><li>Skills</li></a
+				>
+				<a
+					style="text-decoration: none"
+					class="showMenuListElement"
+					href="index.html#Contact"
+					onclick="showMenu(this)"
+					><li>Contact</li></a
+				>
+				<div class="showMenuIcons">
+					<a href="https://github.com/PavelKosik" style="visibility: hidden"
+						><img
+							src="Images/github.png"
+							class="showMenuIconElement"
+							onmouseover="imageChangeSrc(this,'Images/githubHover.png')"
+							onmouseout="imageChangeSrc(this,'Images/github.png')"
+						/>
+					</a>
+				</div>
+			</ul>
+		</div>
+
+		<script>
+			var acc = document.getElementsByClassName("accordionProjectPage");
+
+			for (let i = 0; i < acc.length; i++) {
+				/*acc[i].addEventListener("mouseover", function () {
+								this.classList.toggle(".activeProjectPage-open");
+							});
+			*/
+				acc[i].addEventListener("click", function () {
+					this.classList.toggle("activeProjectPage");
+					var panel = this.nextElementSibling;
+					if (panel.style.maxHeight) {
+						panel.style.maxHeight = null;
+						panel.style.transition =
+							"max-height 0.25s cubic-bezier(0, 1, 0, 1)";
+					} else {
+						var myHeight = panel.scrollHeight;
+						var elements = panel.querySelectorAll("*");
+						for (let a = 0; a < elements.length; a++) {
+							if (elements[a].scrollHeight != null) {
+								myHeight += elements[a].scrollHeight;
+							}
+						}
+						panel.style.maxHeight = myHeight + "px";
+						panel.style.transition =
+							"max-height 0.25s cubic-bezier(1, 0, 1, 0)";
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

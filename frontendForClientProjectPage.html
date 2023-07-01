@@ -11,7 +11,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Pavel Kosik | Frontend For Client Project Page</title>
+		<title>Pavel Kosík | Frontend For Client Project Page</title>
 		<script src="index.js"></script>
 		<script
 			src="https://kit.fontawesome.com/bba4a8722b.js"
@@ -166,9 +166,10 @@
 
 					<div class="panelProjectPage">
 						<p>
-							Camera system is made to be almost identical to the one in the
-							Dark Souls games. That means that player can move the camera with
-							the mouse or lock the camera on to enemies.
+							The implementation after designing the UI was pretty
+							straightforward and easy because I was supposed to only make the
+							frontend. So all the implementation I had to do was to make sure
+							that the UI is responsive and works well.
 						</p>
 
 						<button
@@ -191,25 +192,61 @@
 
 						<div class="panelProjectPage">
 							<p>
-								The following code snippet shows that camera movement is done by
-								rotation of the camera. The only difference between horizontal
-								and vertical is the axis they affect. InvertedMouse can be only
-								1 or -1 based on if the mouse is set as inverted or not.
+								The following code snippet shows how opening registration widget
+								works. All opening functions work mostly the same way but with
+								different widgets.
 							</p>
 
 							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::CameraHorizontal(float horizontal) {
-	if (!lockedOnEnemy) {
-		cameraAttach->AddLocalRotation(FRotator(0, cameraRotationSpeed * horizontal, 0));
+<code class="language-cpp">//this function gets called when user tries to reach the register menu by clicking on the appropriate button
+	void AMyHUD::OpenRegistrationWidget() {
+		//user can reach the register menu only from login menu
+		//it's important to close the login menu so it doesn't block the register menu
+		if (loginWidget && loginWidget->GetIsVisible()) {
+			loginWidget->RemoveFromViewport();
+		}
+		//creates the register menu
+		registrationWidget = CreateWidget&lt;UMyRegistrationUserWidget>(GetWorld(), registrationWidgetTemplete);
+		registrationWidget->AddToViewport();
 	}
-}
+	</code></pre>
+						</div>
 
-void AMyPlayer::CameraVertical(float vertical) {
-	if (!lockedOnEnemy) {
-		cameraAttach->AddLocalRotation(FRotator(cameraRotationSpeed * vertical * invertedMouse, 0, 0));
-	}
-}
-									</code></pre>
+						<button
+							class="accordionProjectPage"
+							onclick="rotateIcon(this)"
+							style="padding: 1vw 4vw"
+						>
+							<i class="fa-solid fa-map iconAccondation"></i>Blueprint Snippet<i
+								class="fa fa-times"
+								aria-hidden="true"
+								style="
+									position: absolute;
+									right: 16px;
+									transform: rotate(45deg);
+									transition: 0.4s;
+								"
+								id="icon"
+							></i>
+						</button>
+						<div class="panelProjectPage">
+							<p>
+								The following blueprint snippet shows what happens when user
+								hovers the button. Most of the button hovers for all the other
+								buttons work almost the same.
+							</p>
+							<img
+								src="Images/FrontendForClientProjectPage/blueprintshowcase1.png"
+							/>
+
+							<p>
+								The following blueprint snippet shows what happens when user
+								stops hovering the button. Most of the other buttons unhovers
+								work the same.
+							</p>
+							<img
+								src="Images/FrontendForClientProjectPage/blueprintshowcase2.png"
+							/>
 						</div>
 					</div>
 				</div>
@@ -368,10 +405,6 @@ void AMyPlayer::CameraVertical(float vertical) {
 			var acc = document.getElementsByClassName("accordionProjectPage");
 
 			for (let i = 0; i < acc.length; i++) {
-				/*acc[i].addEventListener("mouseover", function () {
-								this.classList.toggle(".activeProjectPage-open");
-							});
-			*/
 				acc[i].addEventListener("click", function () {
 					this.classList.toggle("activeProjectPage");
 					var panel = this.nextElementSibling;

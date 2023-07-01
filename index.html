@@ -11,7 +11,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Pavel Kosik | Game Programmer</title>
+		<title>Pavel Kosík | Game Programmer</title>
 		<script src="index.js"></script>
 		<script
 			src="https://kit.fontawesome.com/bba4a8722b.js"
@@ -170,7 +170,18 @@
 												<img
 													src="Images/PortfolioThumbnails/TopDownShooter.png"
 													class="listImage"
+													id="hide"
 												/>
+
+												<video
+													src="Videos/TopDownShooterThumbnailVideo.m4v"
+													autoplay
+													muted
+													class="listVideo"
+													loop
+													style="display: none"
+													id="show"
+												></video>
 												<div class="imageOnHoverText" id="imageOnHoverText">
 													View Project
 												</div>
@@ -280,7 +291,10 @@
 											onmouseover="showHoverText(this)"
 											onmouseleave="hideHoverText(this)"
 										>
-											<button class="listButton">
+											<button
+												class="listButton"
+												onclick="loadPage('towerDefenseProjectPage.html')"
+											>
 												<img
 													src="Images/PortfolioThumbnails/TowerDefenseGame.png"
 													class="listImage"
@@ -341,7 +355,10 @@
 											onmouseover="showHoverText(this)"
 											onmouseleave="hideHoverText(this)"
 										>
-											<button class="listButton">
+											<button
+												class="listButton"
+												onclick="loadPage('quizGameTemplateProjectPage.html')"
+											>
 												<img
 													src="Images/PortfolioThumbnails/QuizGame.png"
 													class="listImage"
@@ -360,7 +377,7 @@
 												<div class="imageOnHoverText" id="imageOnHoverText">
 													View Project
 												</div>
-												<div class="listProjectHeading">Quit Game Templete</div>
+												<div class="listProjectHeading">Quiz Game Templete</div>
 												<span
 													class="listTag"
 													style="
@@ -402,7 +419,10 @@
 											onmouseover="showHoverText(this)"
 											onmouseleave="hideHoverText(this)"
 										>
-											<button class="listButton">
+											<button
+												class="listButton"
+												onclick="loadPage('infiniteRunnerProjectPage.html')"
+											>
 												<img
 													src="Images/PortfolioThumbnails/InfiniteRunner.png"
 													class="listImage"

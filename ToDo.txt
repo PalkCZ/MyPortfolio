@@ -1,1 +1,1 @@
-- Dodělat Graduation project stránku
+- dokoncit stranky projektu: tower def, topdown shooter, quiz, infinite runner

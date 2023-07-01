@@ -11,7 +11,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Pavel Kosik | Top Down Shooter Project Page</title>
+		<title>Pavel Kosík | Top Down Shooter Project Page</title>
 		<script src="index.js"></script>
 		<script
 			src="https://kit.fontawesome.com/bba4a8722b.js"
@@ -53,24 +53,19 @@
 					</table>
 				</div>
 				<p style="font-size: min(3vw, 16px)">
-					This was a one person project I done in school to graduate during my
-					last year at
+					The project was done as a collaboration with a graphic artist. For
+					source control we used Github which I learned a lot about thanks to
+					this project. The following sections contain snippets of code and
+					blueprints but not all of it. If you want to check out all of it you
+					can do so
 					<a
-						href="https://www.sps-pi.cz/"
-						style="color: #08fdd8; text-decoration: none"
-						>SPŠ PI.</a
-					>&nbsp; The main focus of the project was to create computer game
-					similar to Dark Souls in Unreal Engine 5. The following sections
-					contain snippets of code and blueprints but not all of it. If you want
-					to check out all of it you can do so
-					<a
-						href="https://github.com/PavelKosik/GraduationProject"
+						href="https://github.com/PavelKosik/TopDownShooterProject"
 						style="color: #08fdd8; text-decoration: none"
 						>here.</a
 					>
 				</p>
 				<video
-					src="Videos/GraduationProjectThumbnailVideo.m4v"
+					src="Videos/TopDownShooterThumbnailVideo.m4v"
 					autoplay
 					muted
 					loop
@@ -84,7 +79,7 @@
 				></video>
 				<div style="margin-top: 32px">
 					<button class="accordionProjectPage" onclick="rotateIcon(this)">
-						<i class="fa-solid fa-person-walking iconAccondation"></i>
+						<i class="fa-solid fa-plane-up iconAccondation"></i>
 						Player Movement<i
 							class="fa fa-times"
 							aria-hidden="true"
@@ -100,71 +95,10 @@
 
 					<div class="panelProjectPage">
 						<p>
-							Player movement is one of the things which were the most inspired
-							by the Darks Souls series. That means that player can walk, run
-							and roll. For this behavior I used Unreal Engine's ACharacter
-							class and it's functions.
+							Player movement is done to be responsive and dynamic to precisely
+							react to player's inputs. That allows player to manuever around
+							the level and hit the enemies while dodging their attacks.
 						</p>
-						<button
-							class="accordionProjectPage"
-							onclick="rotateIcon(this)"
-							style="padding: 1vw 4vw"
-						>
-							<i class="fa-solid fa-user-group iconAccondation"></i>
-							Animations<i
-								class="fa fa-times"
-								aria-hidden="true"
-								style="
-									position: absolute;
-									right: 16px;
-									transform: rotate(45deg);
-									transition: 0.4s;
-								"
-								id="icon"
-							></i>
-						</button>
-
-						<div class="panelProjectPage">
-							<p>
-								The animations were taken either from the model or from Mixamo.
-								The animations from Mixamo had to be changed using the
-								Retargeter tool to work properly.
-							</p>
-
-							<button
-								class="accordionProjectPage"
-								onclick="rotateIcon(this)"
-								style="padding: 1vw 4vw"
-							>
-								<i class="fa-solid fa-map iconAccondation"></i>Blueprint
-								Snippet<i
-									class="fa fa-times"
-									aria-hidden="true"
-									style="
-										position: absolute;
-										right: 16px;
-										transform: rotate(45deg);
-										transition: 0.4s;
-									"
-									id="icon"
-								></i>
-							</button>
-
-							<div class="panelProjectPage">
-								<p>
-									This blueprint snippet shows how the animation states are
-									connected together.
-								</p>
-								<img src="Images/BlueprintAnimationImage1.png" />
-
-								<p>
-									This blueprint snippet shows one of the rules which manages
-									the change on animation state.
-								</p>
-								<img src="Images/BlueprintAnimationImage2.png" />
-							</div>
-						</div>
-
 						<button
 							class="accordionProjectPage"
 							onclick="rotateIcon(this)"
@@ -191,168 +125,106 @@
 							</p>
 
 							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::MoveHorizontal(float horizontal) {
-	//player can only move if he isn't staggered by the enemies
-	if (!isStaggered) {
-		//when in roll player is locked to move only in the roll direction until the roll is done
-		if (!isRolling) {
-			//player is locked from moving when he is attacking
-			if (!isLightAttacking1 && !isLightAttacking2) {
-				//stores the last horizontal input in case player would decide to roll
-				horizontalForRoll = horizontal;
-				//player's movement is based on where the camera is looking
-				FRotator rightRotation = cameraAttach->GetComponentRotation();
-				//we only want to rotate the player on the Yaw axis
-				//because other axis could cause weird rotations occurring
-				FRotator yawRotation(0.0f, rightRotation.Yaw, 0.0f);
-				//direction based on the current camera rotation
-				FVector rightDirection = FRotationMatrix(yawRotation).GetUnitAxis(EAxis::Y);
-
-				if (isRunning) {
-					if (horizontal != 0) {
-						//lets the stamina system know that player is currently running
-						currentStaminaDrain = sprintStaminaDrain;
-						//sets speed to runningSpeed so player walks faster
-						movementComponent->MaxWalkSpeed = runningSpeed;
-					}
-				}
-
-				else {
-					//if player is not running then the walkSpeed is set to normal walk speed
-					movementComponent->MaxWalkSpeed = playerMovespeed;
-				}
-
-				//makes player move in the rotation direction based on horizontal (input from player - A or D)
-				AddMovementInput(rightDirection, horizontal);
-
-				if (horizontal != 0) {
-					//isMoving is variable used in animations
-					//setting it to true makes player enter moving state in animation
-					isMoving = true;
-					//rotates the player model to the direction he is headed
-					AMyPlayer::RotateToMovementHorizontal(horizontal);
-
-				}
-			}
-		}
-	}
-}</code></pre>
-							<p>
-								The following code shows how I rotate player to rotation. This
-								is necessary because in Dark Souls games the forward is always
-								where the camera is looking. So when player decides to rotate
-								the camera and walk the player model should rotate properly.
-								Just like the previous code the concept is the same for
-								horizontal and vertical movement.
-							</p>
-
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::RotateToMovementHorizontal(float horizontal) {
-	//player model should rotate based on camera only when player isn't locked on enemy
-	//because if player is locked on the enemy then the player model is facing the enemy
-	if (!lockedOnEnemy) {
-
-		if (horizontal < 0) {
-			//smoothly rotates player mesh from his current rotation towards the camera rotation
-			playerSkeletalMesh->SetWorldRotation(FMath::RInterpTo(playerSkeletalMesh->GetComponentRotation(), FRotator(0, cameraAttach->GetComponentRotation().Yaw - 180, 0), 0.03f, 10.0f));
-		}
-
-		if (horizontal > 0)
-		{
-			//smoothly rotates player mesh from his current rotation towards the camera rotation
-			playerSkeletalMesh->SetWorldRotation(FMath::RInterpTo(playerSkeletalMesh->GetComponentRotation(), FRotator(0, cameraAttach->GetComponentRotation().Yaw - 360, 0), 0.03f, 10.0f));
-		}
-	}
-}</code></pre>
-							<p>
-								The following code shows two functions which handle player
-								running. The isRunning variable is used to detect which
-								animation state should be played.
-							</p>
-							<pre class="line-numbers">
-	<code class="language-cpp">void AMyPlayer::StartRun() {
-		//player can only run if he has at least some stamina left
-		if (currentStamina > 0.0f) {
-			//enables the running animation
-			isRunning = true;
-		}
-	}
+<code class="language-cpp">void AMyPlayer::MoveHorizontal(float horizontal)
+	{
+		if (currentDashTime <= 0.0f) {
+			if (horizontal > 0) {
+				madeSoundTimerStep = 0.25f;
 	
-	//called once player lets go of the SHIFT key or his stamina reaches 0
-	void AMyPlayer::StopRun() {
-		//disables the running animation
-		isRunning = false;
-	}
-	</code></pre>
+				if (currentPlayerMovementSpeedX > 0) {
+					currentPlayerMovementSpeedX = 0;
+				}
+	
+				if (currentPlayerMovementSpeedX - increasePlayerMoveSpeed >= -maxPlayerMoveSpeed) {
+					currentPlayerMovementSpeedX -= increasePlayerMoveSpeed;
+				}
+	
+				else {
+					currentPlayerMovementSpeedX = -maxPlayerMoveSpeed;
+				}
+			}
+	
+			if (horizontal < 0) {
+				madeSoundTimerStep = 0.25f;
+	
+				if (currentPlayerMovementSpeedX < 0) {
+					currentPlayerMovementSpeedX = 0;
+				}
+	
+	
+				if (currentPlayerMovementSpeedX + increasePlayerMoveSpeed <= maxPlayerMoveSpeed) {
+					currentPlayerMovementSpeedX += increasePlayerMoveSpeed;
+				}
+	
+				else {
+					currentPlayerMovementSpeedX = maxPlayerMoveSpeed;
+				}
+			}
+	
+			if (horizontal == 0) {
+	
+				if (currentPlayerMovementSpeedX > 0) {
+	
+					if (currentPlayerMovementSpeedX - decreasePlayerMoveSpeed > 0) {
+						currentPlayerMovementSpeedX -= decreasePlayerMoveSpeed;
+					}
+	
+					else {
+						currentPlayerMovementSpeedX = 0;
+					}
+				}
+	
+				if (currentPlayerMovementSpeedX < 0) {
+	
+					if (currentPlayerMovementSpeedX + decreasePlayerMoveSpeed < 0) {
+						currentPlayerMovementSpeedX += decreasePlayerMoveSpeed;
+					}
+	
+					else {
+						currentPlayerMovementSpeedX = 0;
+					}
+				}
+			}
+	
+			if (playerSkeletalMesh) {
+				AddMovementInput(FVector(currentPlayerMovementSpeedX, 0, 0), 1);
+			}
+		}
+		moveDirectionX = -horizontal;
+	}</code></pre>
 							<p>
-								The following code snippet shows what happens when player
-								presses the roll key. This function calls HandleRolling function
-								which handles all the roll movement.
+								The following code shows how player model is rotated to look at
+								the mouse cursor. This is important because game mechanics like
+								parry and dash are based on the player rotation.
 							</p>
 
 							<pre class="line-numbers">
-	<code class="language-cpp">void AMyPlayer::StartRoll() {
-		//player can only roll when he isn't attacking
-		if (!isLightAttacking1 && !isLightAttacking2) {
-			//prevents player to spam the roll
-			if (!isRolling) {
-				//player can only roll if he has enough stamina
-				if (currentStamina >= rollStaminaDrain) {
-					//makes player enter roll animation state
-					isRolling = true;
-					//player rolls have a certain duration which is handled by currentRollTime and rollAnimDuration
-					currentRollTime = 0.0f;
-					//decreases the stamina by rollStaminaDrain when player starts the roll
-					currentStamina -= rollStaminaDrain;
-					//resets the player stamina recovery time
-					currentStaminaRecoveryTime = 0.0f;
-					//makes player move in the roll direction
-					HandleRolling();
-				}
-			}
-		}
+<code class="language-cpp">void AMyPlayer::RotatePlayerToMousePosition() {
+
+	FVector mousePosition;
+	FVector mouseDirection;
+
+	FVector mousePositionDeprojected;
+	FVector mouseDirectionDeprojected;
+	
+	FHitResult hit;
+
+	if (myPlayerController->GetHitResultUnderCursor(ECC_Visibility, true, hit)) {
+		mousePosition = hit.Location;
 	}
-		</code></pre>
-							<p>
-								The following code snippet shows how the roll is handled until
-								the animation is finished.
-							</p>
-							<pre class="line-numbers">
-			<code class="language-cpp">void AMyPlayer::HandleRolling() {
-				//player should only be moving roll like when he is in roll
-				if (isRolling) {
-			
-					FRotator rotation = playerSkeletalMesh->GetComponentRotation();
-					FRotator yawRotation(0, rotation.Yaw, 0);
-					FVector direction = FVector(0, 0, 0);
-					//if the player is locked on enemy he rolls relative to him and input
-					if (lockedOnEnemy) {
-			
-						if (horizontalForRoll != 0) {
-							direction += FRotationMatrix(yawRotation).GetUnitAxis(EAxis::X) * -horizontalForRoll;
-						}
-			
-						if (verticalForRoll != 0) {
-							direction += FRotationMatrix(yawRotation).GetUnitAxis(EAxis::Y) * verticalForRoll;
-						}
-					}
-					//if player is not locked he rolls the direction he is currently facing
-					if (direction.IsZero()) {
-						direction = FRotationMatrix(yawRotation).GetUnitAxis(EAxis::Y);
-					}
-					//makes player move in the direction of the roll
-					movementComponent->MaxWalkSpeed = rollSpeed;
-					AddMovementInput(direction, 1);
-					//increases the time that player is rolling
-					currentRollTime += deltaTimeForRolling;
-			
-				}
-				//stop the player roll once he has finished rolling
-				if (currentRollTime >= rollAnimDuration) {
-					isRolling = false;
-				}
-			}
-				</code></pre>
+
+	
+	if (playerSkeletalMesh) {
+		FVector direction = mousePosition - (cameraAttach->GetComponentLocation() - playerSkeletalMesh->GetComponentLocation());
+
+		FRotator newRotation = UKismetMathLibrary::FindLookAtRotation(playerSkeletalMesh->GetComponentLocation(), direction);
+
+		//decreasing the Y rotation by 90 so the player looks straight at the mouse position
+		newRotation = newRotation - FRotator(0, 90, 0);
+		newRotation = FRotator(0, newRotation.Yaw, 0);
+		playerSkeletalMesh->SetWorldRotation(newRotation);
+	}
+}</code></pre>
 						</div>
 					</div>
 					<button class="accordionProjectPage" onclick="rotateIcon(this)">
@@ -537,8 +409,8 @@ void AMyPlayer::CameraVertical(float vertical) {
 					</div>
 
 					<button class="accordionProjectPage" onclick="rotateIcon(this)">
-						<i class="fa-solid fa-shield-halved iconAccondation"></i>
-						Combat System<i
+						<i class="fa-solid fa-explosion iconAccondation"></i>
+						Shooting System<i
 							class="fa fa-times"
 							aria-hidden="true"
 							style="
@@ -938,7 +810,7 @@ void AMyPlayer::HandleAttacking(float DeltaTime) {
 					</div>
 
 					<button class="accordionProjectPage" onclick="rotateIcon(this)">
-						<i class="fa-solid fa-skull iconAccondation"></i>
+						<i class="fa-solid fa-jet-fighter iconAccondation"></i>
 						Enemy Characters<i
 							class="fa fa-times"
 							aria-hidden="true"
@@ -1054,115 +926,6 @@ void AMyPlayer::HandleAttacking(float DeltaTime) {
 	}
 
 }</code></pre>
-						</div>
-					</div>
-
-					<button class="accordionProjectPage" onclick="rotateIcon(this)">
-						<i class="fa-solid fa-scroll iconAccondation"></i>
-						Quest System<i
-							class="fa fa-times"
-							aria-hidden="true"
-							style="
-								position: absolute;
-								right: 16px;
-								transform: rotate(45deg);
-								transition: 0.4s;
-							"
-							id="icon"
-						></i>
-					</button>
-
-					<div class="panelProjectPage">
-						<p>
-							There is only one quest for player in this game. The quest is to
-							rescue all the NPC characters by killing all the enemies.
-						</p>
-
-						<button
-							class="accordionProjectPage"
-							onclick="rotateIcon(this)"
-							style="padding: 1vw 4vw"
-						>
-							<i class="fa-solid fa-code iconAccondation"></i>Code Snippets<i
-								class="fa fa-times"
-								aria-hidden="true"
-								style="
-									position: absolute;
-									right: 16px;
-									transform: rotate(45deg);
-									transition: 0.4s;
-								"
-								id="icon"
-							></i>
-						</button>
-						<div class="panelProjectPage">
-							<p>
-								The following code snippet shows how NPC getting rescued by
-								player is handled.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">//checks if the NPC is rescued
-	//the enemies needed to be killed for the  NPC to be rescued are stored in an array
-	//the enemy gets removed from the array when they die
-	//when they array is empty the NPC is rescued
-	for (int i = 0; i &lt; enemiesNeededToDie.Num(); i++) {
-		if (enemiesNeededToDie[i] != nullptr) {
-			if (enemiesNeededToDie[i]->isDead) {
-				enemiesNeededToDie.RemoveAt(i);
-			}
-		}
-
-		else {
-			enemiesNeededToDie.RemoveAt(i);
-		}
-	}
-	//once rescued changes the text to a yellow exclamation mark 
-	//that looks like the NPC has quest for the player
-	if (enemiesNeededToDie.Num() == 0 || enemiesNeededToDie.IsEmpty()) {
-		if (!rescued) {
-			dialogIndex++;
-			textComp->SetText(FText::FromString(dialogNotAllRescued[dialogIndex]));
-			textComp->SetTextRenderColor(FColor::Yellow);
-			rescued = true;
-		}
-
-	}
-</code></pre>
-							<p>
-								The following code snippet shows how NPC is behaving after being
-								rescued by player.
-							</p>
-
-							<pre class="line-numbers">
-<code class="language-cpp">//if player is near enough to see the text
-	//the text gets rotated to always face the camera so player can always read the text without problem
-	if (textComp) {
-		if (player == nullptr) {
-			player = Cast&lt;AMyPlayer>(GetWorld()->GetFirstPlayerController()->GetCharacter());
-		}
-		if (player != nullptr) {
-			FVector playerLocation = player->cameraAttach->GetComponentLocation();
-			if (FVector::Distance(GetActorLocation(), playerLocation) &lt;= 2000.0f) {
-				FRotator newRot = UKismetMathLibrary::FindLookAtRotation(textComp->GetComponentLocation(), playerLocation);
-				if (textComp != nullptr) {
-					textComp->SetWorldRotation(newRot);
-				}
-			}
-		}
-	}
-	
-	//once rescued the NPC should always face the player
-	if (rescued) {
-		if (player != nullptr && mesh != nullptr) {
-			float distance = FVector::Distance(player->playerSkeletalMesh->GetComponentLocation(), mesh->GetComponentLocation());
-			if (distance > 5.0f && distance &lt;= 2000.0f) {
-				FVector playerLocation = player->playerSkeletalMesh->GetComponentLocation();
-				FRotator meshRot = UKismetMathLibrary::FindLookAtRotation(mesh->GetComponentLocation(), playerLocation) - FRotator(0, 90, 0);
-				mesh->SetWorldRotation(meshRot);
-			}
-		}
-	}
-								</code></pre>
 						</div>
 					</div>
 
