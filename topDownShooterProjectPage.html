@@ -225,6 +225,62 @@
 		playerSkeletalMesh->SetWorldRotation(newRotation);
 	}
 }</code></pre>
+
+							<p>
+								The following code shows how player controller is set up so
+								everything functions properly.
+							</p>
+
+							<pre class="line-numbers">
+<code class="language-cpp">void AMyPlayer::SetupPlayerController() {
+
+	// gets reference to the first player controller so we can set things up
+	myPlayerController = UGameplayStatics::GetPlayerController(GetWorld(), 0);
+
+	//show cursor so player can aim and shoot	
+	myPlayerController->bShowMouseCursor = true;
+
+	// enable all of mouse events
+	myPlayerController->bEnableClickEvents = true;
+	myPlayerController->bEnableMouseOverEvents = true;
+
+	// reference to UUserWidget created from cursorWidgetTemplete
+	// this UUserWidget is used as default game cursor
+	UUserWidget* cursorWidget = CreateWidget&lt;UUserWidget>(GetGameInstance(), cursorWidgetTemplete);
+
+	// sets the default cursor to the cursor we created
+	myPlayerController->SetMouseCursorWidget(EMouseCursor::Default, cursorWidget);
+
+	// makes sure the mouse input works the same way when cursor is shown/not shown
+	UWidgetBlueprintLibrary::SetInputMode_GameAndUIEx(myPlayerController, cursorWidget, EMouseLockMode::LockAlways, false);
+}</code></pre>
+							<p>
+								The following code snippet shows how player dash is implemented.
+							</p>
+
+							<pre class="line-numbers">
+<code class="language-cpp">void AMyPlayer::PlayerDash() {
+
+	if (currentDelayBetweenDashes <= 0) {
+
+		currentDashTime = maxDashTime;
+		currentDelayBetweenDashes = maxDelayBetweenDashes;
+
+		if (moveDirectionX != 0 || moveDirectionY != 0) {
+
+			dashDirection = FVector(moveDirectionX, moveDirectionY, 0);
+			dashDirection.Normalize(1.0f);
+
+		}
+
+		if (moveDirectionX == 0 && moveDirectionY == 0) {
+
+			dashDirection = (cursorStaticMesh->GetRightVector()) * 1000;
+			dashDirection.Normalize(1.0f);
+
+		}
+	}
+}</code></pre>
 						</div>
 					</div>
 					<button class="accordionProjectPage" onclick="rotateIcon(this)">
@@ -244,9 +300,9 @@
 
 					<div class="panelProjectPage">
 						<p>
-							Camera system is made to be almost identical to the one in the
-							Dark Souls games. That means that player can move the camera with
-							the mouse or lock the camera on to enemies.
+							Camera system is made to allow player to check the upcoming
+							challenges awaiting him around the level and be precise enough
+							when fighting enemies.
 						</p>
 
 						<button
@@ -269,142 +325,35 @@
 
 						<div class="panelProjectPage">
 							<p>
-								The following code snippet shows that camera movement is done by
-								rotation of the camera. The only difference between horizontal
-								and vertical is the axis they affect. InvertedMouse can be only
-								1 or -1 based on if the mouse is set as inverted or not.
+								The following code snippet shows how camera functions. Camera
+								should free view when player holds the right mouse button which
+								allows him to look around the level. There is a limit to how far
+								player can look with the camera though.
 							</p>
 
 							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::CameraHorizontal(float horizontal) {
-	if (!lockedOnEnemy) {
-		cameraAttach->AddLocalRotation(FRotator(0, cameraRotationSpeed * horizontal, 0));
-	}
-}
-
-void AMyPlayer::CameraVertical(float vertical) {
-	if (!lockedOnEnemy) {
-		cameraAttach->AddLocalRotation(FRotator(cameraRotationSpeed * vertical * invertedMouse, 0, 0));
-	}
-}
-									</code></pre>
-							<p>
-								The following code snippet shows how camera behaves in case
-								player locks on to an enemy.
-							</p>
-
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::HandleCamera() {
-	//if player is locked onto an enemy
-	if (lockedOnEnemy) {
-		//gets the rotation to look at the enemy
-		FRotator newRot = UKismetMathLibrary::FindLookAtRotation(cameraAttach->GetComponentLocation(), currentlyLockedOnEnemy->GetActorLocation());
-		//sets the proper rotation to look at the enemy for the camera
-		cameraAttach->SetWorldRotation(FRotator(newRot.Pitch, newRot.Yaw - 5, newRot.Roll));
-		//sets the proper rotation to look at the enemy for the player
-		playerSkeletalMesh->SetWorldRotation(FMath::RInterpTo(playerSkeletalMesh->GetComponentRotation(), FRotator(0, cameraAttach->GetComponentRotation().Yaw - 90, 0), 0.03f, 10.0f));
-	}
-	//makes sure the camera doesn't go too far up or too far down
-	cameraAttach->SetWorldRotation(FRotator(FMath::Clamp(cameraAttach->GetComponentRotation().Pitch, -55.0f, 55.0f), cameraAttach->GetComponentRotation().Yaw, 0));
-}
-
-																			</code></pre>
-							<p>
-								The following snippet shows what happens when player tries to
-								lock on to the enemy.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::LockOnEnemy() {
-	//by default there is no enemy to lock onto
-	bool foundEnemyToLockOn = false;
-	TArray&lt;TEnumAsByte&lt;EObjectTypeQuery>> traceObjectTypes;
-	//all enemies are of type APawn
-	traceObjectTypes.Add(UEngineTypes::ConvertToObjectType(ECollisionChannel::ECC_Pawn));
-	TArray&lt;AActor*> ignoreActors;
-	//player actor is ignored because else player would lock on to himself
-	ignoreActors.Init(this, 1);
-	AActor* enemyToLockOn = nullptr;
-
-	TArray&lt;AActor*> outActors;
-	//sphere overlap all actors in the direction camera is currently facing 
-	UKismetSystemLibrary::SphereOverlapActors(GetOwner(), playerSkeletalMesh->GetComponentLocation(), maxTargetLockDistance, traceObjectTypes, AMyEnemyCorpseCharacter::StaticClass(), ignoreActors, outActors);
-
-	//in case player was previously locked on any other enemy
-	if (lockedOnEnemy) {
-		class AMyEnemyCorpseCharacter* enemy = Cast&lt;AMyEnemyCorpseCharacter>(currentlyLockedOnEnemy);
-		if (enemy) {
-			//when player locks on to enemy his healthbar is shown
-			//player being already locked on enemy and pressing the lock button again causes player to unlock
-			//the enemy health bar gets hidden because of that
-			enemy->HideHealthBar();
+<code class="language-cpp">if (shouldFreeView) {
+		float mouseX, mouseY;
+		myPlayerController->GetMousePosition(mouseX, mouseY);
+		if (mouseX / viewportSize.X > 0.8f || mouseX / viewportSize.X < 0.2f || mouseY / viewportSize.Y > 0.8f || mouseY / viewportSize.Y < 0.2f) {
+			cameraFollowPosition.Y -= cameraSpeed * (mouseY / viewportSize.Y - 0.5f);
 		}
-		//player gets unlocked and the reference to the lockedEnemy is set to nullptr;
-		lockedOnEnemy = false;
-		currentlyLockedOnEnemy = nullptr;
-		foundEnemyToLockOn = false;
-		return;
+
+		if (FVector::Dist(playerSkeletalMesh->GetComponentLocation(), cameraFollowPosition) > maxCameraDistance) {
+			cameraFollowPosition = lastCameraCorrectPos;
+		}
+
+		else {
+			lastCameraCorrectPos = cameraFollowPosition;
+		}
+
+		cameraAttach->SetWorldLocation(cameraFollowPosition);
 	}
 
 	else {
-		float closestDotToCenter = 0.f;
-		//search through all the overlapped enemies
-		for (int i = 0; i &lt; outActors.Num(); i++) {
-			float dot = FVector::DotProduct(cameraAttach->GetForwardVector(), (outActors[i]->GetActorLocation() - playerSkeletalMesh->GetComponentLocation()).GetSafeNormal());
-			//the cast with the if statement makes sure that all the objects to lock onto are enemies
-			class AMyEnemyCorpseCharacter* enemy = Cast&lt;AMyEnemyCorpseCharacter>(outActors[i]);
-			if (enemy) {
-				//player can only lock onto enemies which aren't dead
-				if (!enemy->isDead) {
-					//if earlier in the loop there was enemy found
-					if (enemyToLockOn != nullptr) {
-						//calculates distance to the old enemy and distance to the new enemy
-						float distanceOld = FVector::Distance(enemyToLockOn->GetActorLocation(), GetActorLocation());
-						float distanceNew = FVector::Distance(outActors[i]->GetActorLocation(), GetActorLocation());
-						//if the new enemy is closer to player he gets set as the new enemy to lock on
-						if (distanceOld > distanceNew) {
-							closestDotToCenter = dot;
-							foundEnemyToLockOn = true;
-							enemyToLockOn = outActors[i];
-						}
-					}
-					//if there was no enemy to lock on to yet, the enemy gets selected no matter the distance
-					else {
-						closestDotToCenter = dot;
-						foundEnemyToLockOn = true;
-						enemyToLockOn = outActors[i];
-					}
-				}
-			}
-		}
-	}
-
-
-	//if there has been found enemy in the player view
-	if (enemyToLockOn != nullptr) {
-		if (currentlyLockedOnEnemy != enemyToLockOn) {
-			currentlyLockedOnEnemy = enemyToLockOn;
-			class AMyEnemyCorpseCharacter* enemy = Cast&lt;AMyEnemyCorpseCharacter>(currentlyLockedOnEnemy);
-			if (enemy) {
-				//enemies healthbar is shown
-				enemy->ShowHealthBar();
-			}
-		}
-	}
-
-	//if the enemy to lock on has been found
-	//still makes player camera look at the enemy until he unlocks
-	if (foundEnemyToLockOn) {
-		lockedOnEnemy = true;
-	}
-
-	//if no enemy to lock on has been found
-	else {
-		//makes the camera look the direction the player model is currently facing
-		cameraAttach->SetWorldRotation(FRotator(FMath::Clamp(cameraAttach->GetComponentRotation().Pitch, -55.0f, 55.0f), playerSkeletalMesh->GetComponentRotation().Yaw + 90.0f, 0));
-	}
-}
-																				
-																																							</code></pre>
+		cameraFollowPosition = GetActorLocation();
+		cameraAttach->SetWorldLocation(GetActorLocation());
+	}</code></pre>
 						</div>
 					</div>
 
@@ -425,9 +374,11 @@ void AMyPlayer::CameraVertical(float vertical) {
 
 					<div class="panelProjectPage">
 						<p>
-							The combat was heavily inspired by the Dark Souls series. It is
-							mainly focused on player finding the right moments to attack the
-							enemies and dodging attacks with rolls until that moment happens.
+							The special thing about the shooting system is that player must
+							bounce his projectiles using the walls for the projectiles to be
+							able to kill enemies. This forces player so position so that he
+							can bounce the projectiles to hit the enemies while simultaneously
+							dodging from enemy's attacks.
 						</p>
 
 						<button
@@ -451,361 +402,123 @@ void AMyPlayer::CameraVertical(float vertical) {
 						<div class="panelProjectPage">
 							<p>
 								The following code snippet shows what happens when player
-								decides to press the attack button.
+								decides to press the fire button and shoot the projectile.
 							</p>
 							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::LightAttack() {
-	//player isn't allowed to attack when he is staggered
-	if (!isStaggered) {
-		//attack can only be used if player has enough stamina
-		if (currentStamina >= lightAttackStaminaDrain) {
-			if (isLightAttacking1 == false) {
-				if (isLightAttacking2) {
-					//properly removes the stamina if player spams the attack button
-					shouldRemoveStaminaWhenTheNextAttackStarts = true;
-				}
-				else {
-					//important to set because it resets player stamina restore time
-					shouldRemoveStaminaAfterLightAttack = true;
-				}
-
-				isLightAttacking1 = true;
-
-				//makes the attack come through
-				if (GetWorldTimerManager().IsTimerActive(lightAttackTimerHandle) == false) {
-					GetWorld()->GetTimerManager().SetTimer(lightAttackTimerHandle, this, &AMyPlayer::DoLightAttack, lightAttack1AnimLenght, false);
-
-				}
-
-				else {
-					GetWorld()->GetTimerManager().ClearTimer(lightAttackTimerHandle);
-					GetWorld()->GetTimerManager().SetTimer(lightAttackTimerHandle, this, &AMyPlayer::DoLightAttack, lightAttack1AnimLenght, false);
-				}
-			}
-
-			else {
-				//sequences another attack if player spams the attack button
-				if (isLightAttacking2 == false) {
-
-					shouldRemoveStaminaWhenTheNextAttackStarts = true;
-
-					isLightAttacking2 = true;
-
-					if (GetWorldTimerManager().IsTimerActive(lightAttackTimerHandle) == false) {
-						GetWorld()->GetTimerManager().SetTimer(lightAttackTimerHandle, this, &AMyPlayer::DoLightAttack, lightAttack2AnimLenght, false);
-
-					}
-
-					else {
-						GetWorld()->GetTimerManager().ClearTimer(lightAttackTimerHandle);
-						GetWorld()->GetTimerManager().SetTimer(lightAttackTimerHandle, this, &AMyPlayer::DoLightAttack, lightAttack2AnimLenght, false);
-					}
-				}
-			}
-		}
-	}
-}
-								
-																											</code></pre>
-							<p>
-								The following code snippet shows how game handles which enemies
-								can take damage and which cannot.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	//hitbox is done with a cube called attackHitbox that can overlap enemies
-	//if player decides to attack all the enemies who are currently overlapping the hitbox take damage
-	if (Cast&lt;AMyEnemyCorpseCharacter>(OtherActor) != nullptr) {
-		//each enemy that overlaps is added to the array
-		//so he can take the damage
-		overlappingEnemies.AddUnique(Cast&lt;AMyEnemyCorpseCharacter>(OtherActor));
-	}
-}
-
-void AMyPlayer::OnOverlapEnd(class UPrimitiveComponent* OverlappedComp, class AActor* OtherActor, class UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+<code class="language-cpp">void AMyPlayer::LeftClickFunction()
 {
-	//if the enemy stops overlapping the attackHitbox
-	if (Cast&lt;AMyEnemyCorpseCharacter>(OtherActor) != nullptr) {
-		//each enemy that stops overlapping is removed from the array
-		//so he doesn't take damage anymore
-		overlappingEnemies.Remove(Cast&lt;AMyEnemyCorpseCharacter>(OtherActor));
-	}
-}
-</code></pre>
-							<p>
-								The following code snippets shows how the stagger state is
-								handled. Stagger is a state which happens right after player has
-								been hit for a short period of time. In this period of time
-								player is unable to do anything.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">//gets called when player takes damage from enemies
-void AMyPlayer::Stagger() {
-	//makes sure the player stagger animation state is played
-	isStaggered = true;
-	//when this timer is active player can't move, roll or attack
-	GetWorld()->GetTimerManager().SetTimer(staggerTimerHandle, this, &AMyPlayer::StopStagger, staggerDuration, false);
-	
-}
-	
-//called once the timer set in Stagger function runs out
-void AMyPlayer::StopStagger() {
-	//changes animation and allows player to play again
-	isStaggered = false;
-}
-	
-	</code></pre>
-							<p>
-								The following code snippet shows how attacking is handled after
-								the initial light attack function. It shows how the attacks are
-								chained together if player decides to spam the attack button and
-								how attacks affect the enemies that were hit by them.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">//called if player is currently attacking
-void AMyPlayer::HandleAttacking(float DeltaTime) {
-	//if either of attack animations is currently playing
-	if (isLightAttacking1 || isLightAttacking2) {
-		//increases the time that tracks the animation playing
-		currentAttackDuration += DeltaTime;
-		//damages the enemies
-		for (int i = 0; i &lt; overlappingEnemies.Num(); i++) {
-			//makes sure the enemy takes damage only once during one player attack
-			if (!overlappingEnemies[i]->alreadyTookDamageFromAttack) {
-				overlappingEnemies[i]->MyTakeDamage(lightAttackDamage);
-				overlappingEnemies[i]->alreadyTookDamageFromAttack = true;
-			}
-		}
-	}
-	//if player stopped attacking
-	else {
-		//the attack timer gets reseted
-		currentAttackDuration = 0.0f;
-		//and all the enemies can take damage again, they can take damage again every time the player animation changes
-		for (int i = 0; i &lt; overlappingEnemies.Num(); i++) {
-			overlappingEnemies[i]->alreadyTookDamageFromAttack = false;
-		}
-	}
-	
-	//makes sure the stamina gets removed properly and the enemies can be attacked again once the animation finishes
-	if (isLightAttacking1) {
-		if (currentAttackDuration >= lightAttack1AnimLenght) {
-			isLightAttacking1 = false;
-			currentAttackDuration = 0.0f;
-			if (isLightAttacking2 && shouldRemoveStaminaWhenTheNextAttackStarts) {
-				shouldRemoveStaminaAfterLightAttack = true;
-				shouldRemoveStaminaWhenTheNextAttackStarts = false;
-				for (int i = 0; i &lt; overlappingEnemies.Num(); i++) {
-					overlappingEnemies[i]->alreadyTookDamageFromAttack = false;
-				}
-			}
-		}
-	}
-	
-	//makes sure the stamina gets removed properly and the enemies can be attacked again once the animation finishes
-	if (isLightAttacking2) {
-		if (currentAttackDuration >= lightAttack2AnimLenght) {
-			isLightAttacking2 = false;
-			currentAttackDuration = 0.0f;
-			if (isLightAttacking1 && shouldRemoveStaminaWhenTheNextAttackStarts) {
-				shouldRemoveStaminaAfterLightAttack = true;
-				shouldRemoveStaminaWhenTheNextAttackStarts = false;
-				for (int i = 0; i &lt; overlappingEnemies.Num(); i++) {
-					overlappingEnemies[i]->alreadyTookDamageFromAttack = false;
-				}
-			}
-		}
-	}
-}
-			</code></pre>
-							<p>
-								The following code snippet shows how player's death is handled.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyPlayer::HandleDeath() {
-	//if player health falls to 0 he dies
-	if (currentPlayerHealth &lt;= 0) {
-		//the timer is only set once
-		//after that it just waits to restart the level in RestartLevelAfterPlayerDie function
-		if (GetWorldTimerManager().IsTimerActive(restartLevelTimerHandle) == false) {
-			isDying = true;
-			GetWorld()->GetTimerManager().SetTimer(restartLevelTimerHandle, this, &AMyPlayer::RestartLevelAfterPlayerDie, restartLevelDuration, false);
-		}
-	}
-}
-					</code></pre>
-							<p>
-								The following snippet shows how enemy taking damage from player
-								is handled.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyEnemyCorpseCharacter::MyTakeDamage(float damage) {
-	//if enemy takes damage his health bar is shown
-	if (enemyHealthWidget != nullptr) {
-		enemyHealthWidget->SetVisibility(ESlateVisibility::Visible);
-	}
 
-	//decrease the health by the amount passed from player
-	currentHealth -= damage;
+	FHitResult hit;
+	//player can only shoot if there isn't any other projectile spawned
+	if (currentProjectile == NULL) {
+		madeSoundTimerShoot = 0.25f;
+		//check if player clicked somewhere on the map
+		if (myPlayerController->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hit))
+		{
 
-	//if player is not locked on to this enemy then the health bar is hidden shortly after taking damage
-	if ((Cast&lt;AMyEnemyCorpseCharacter>(player->currentlyLockedOnEnemy) == this) == false) {
-		GetWorld()->GetTimerManager().SetTimer(showHealthAfterTakenDamageTimerHandle, this, &AMyEnemyCorpseCharacter::HideHealthBar, timeToHideHealthBarAfterTakingDamage, false);
-	}
-}
-		</code></pre>
-							<p>
-								The following code snippet shows how enemy damaging player is
-								handled.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyEnemyCorpseCharacter::MyDamagePlayer(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
-	if (isDead == false) {
-		if (myCont != nullptr) {
-			if (myCont->playerTookDamageFromCurrentAttack == false) {
-
-				//if enemy weapon collides with player hitbox
-				if (OtherComp->ComponentHasTag("PlayerCapsule")) {
-					if (player != nullptr) {
-
-						//and player isn't rolling because he shouldn't take damage when he rolls
-						if (!player->isRolling) {
-
-							//makes sure player does take damage only once from one animation attack
-							myCont->playerTookDamageFromCurrentAttack = true;
-
-							//decreases player health based on his armor
-							player->currentPlayerHealth -= attackDamage - player->playerArmorValue;
-							
-							//staggers player
-							player->Stagger();
-							return;
-						}
-					}
-				}
-			}
-		}
-	}
-}</code></pre>
-							<p>
-								This code snippet shows how enemy behaves if he is near enough
-								to the player to see him.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">if (myEnemyLogic != nullptr && myEnemyLogic->player != nullptr) {
-
-	if (FVector::Distance(GetNavAgentLocation(), myEnemyLogic->player->playerSkeletalMesh->GetComponentLocation()) <= distanceToSeePlayerAt) {
-		if (!myEnemyLogic->isAttacking) {
-			if (FVector::Distance(GetNavAgentLocation(), myEnemyLogic->player->playerSkeletalMesh->GetComponentLocation()) <= distanceToStartAttackingAt) {
-
-				//if enemy is near enough to player and can attack him
-				if (!GetWorldTimerManager().IsTimerActive(enemyAttackTimerHandle) && !GetWorldTimerManager().IsTimerActive(waitTimeBetweenAttacksTimerHandle)) {
-
-					//plays the attack animation
-					myEnemyLogic->isAttacking = true;
-
-					//stops the enemy from moving in the attack animation
-					StopMovement();
-
-					//after the animation finishes stops the attack
-					GetWorld()->GetTimerManager().SetTimer(enemyAttackTimerHandle, this, &AMyEnemyCorpseAIController::StopAttack, attackLength, false);
-
-					//sets up timer between enemy attacks
-					GetWorld()->GetTimerManager().SetTimer(waitTimeBetweenAttacksTimerHandle, this, &AMyEnemyCorpseAIController::RandomizeWaitTime, waitTimeBetweenAttacks, false);
-				}
-
-				//if enemy can't attack player because he is waiting for the timer between attacks to run out
-				//steering = walking around player
-				else {
-					AMyEnemyCorpseAIController::SteerAroundPlayer();
-				}
+			if (FVector::Dist2D(hit.ImpactPoint, playerSkeletalMesh->GetComponentLocation()) < 40) {
+				return;
 			}
 
-			//if enemy is too far from player to attack him
-			else {
+			//else spawn the projectile
+			else
+			{
+				FActorSpawnParameters parameters;
+				parameters.Owner = this;
 
-				//if enemy should attack player he walks towards him
-				if (!GetWorldTimerManager().IsTimerActive(waitTimeBetweenAttacksTimerHandle)) {
-					chasingPlayer = true;
-					MoveToLocation(myEnemyLogic->player->playerSkeletalMesh->GetComponentLocation());
-				}
+				FRotator rotator = FRotator(0, 0, 0);
 
-				//else he just walks around him
-				else {
-					AMyEnemyCorpseAIController::SteerAroundPlayer();
-				}
+				FCollisionQueryParams collisionParameters;
+
+				//get projectile spawn position so we can spawn the projectile there
+				FVector spawnPos = FVector(projectileSpawn->GetComponentLocation().X, projectileSpawn->GetComponentLocation().Y, GetActorLocation().Z);
+				FVector positionToGo;
+
+				positionToGo = (cursorStaticMesh->GetRightVector()) * 1000;
+				positionToGo = FVector(positionToGo.X, positionToGo.Y, projectileSpawn->GetComponentLocation().Z);
+		
+
+				AMyProjectile* spawned = GetWorld()->SpawnActor&lt;AMyProjectile>(projectileSpawnObject, spawnPos, rotator, parameters);
+
+				currentProjectile = spawned;
+
+				//normalize the vector so the projectile speed isn't affected by how far player clicked
+				positionToGo.Normalize(1.0f);
+
+				//send the direction information to projectile
+				spawned->positionToGoTo = positionToGo;
+				spawned->startPosition = projectileSpawn->GetRelativeLocation();
+				spawned->playerObject = this;
 			}
+
 		}
 
-		//if enemy is attacking make sure he is not moving
 		else {
-			StopMovement();
-		}
+			FActorSpawnParameters parameters;
+			parameters.Owner = this;
 
-		//handles that player doesn't get hit more times from the same attack
-		AMyEnemyCorpseAIController::HandlePlayerTakeDamageTime(DeltaTime);
+			FRotator rotator = FRotator(0, 0, 0);
+
+			FCollisionQueryParams collisionParameters;
+
+			//get projectile spawn position so we can spawn the projectile there
+			FVector spawnPos = projectileSpawn->GetComponentLocation();
+			FVector positionToGo;
+
+			positionToGo = (cursorStaticMesh->GetRightVector()) * 1000;
+			positionToGo = FVector(positionToGo.X, positionToGo.Y, projectileSpawn->GetComponentLocation().Z);
+
+			AMyProjectile* spawned = GetWorld()->SpawnActor&lt;AMyProjectile>(projectileSpawnObject, spawnPos, rotator, parameters);
+
+			currentProjectile = spawned;
+
+			//normalize the vector so the projectile speed isn't affected by where player clicked
+			positionToGo.Normalize(1.0f);
+
+
+			//send the direction information to projectile
+			spawned->positionToGoTo = positionToGo;
+			spawned->startPosition = projectileSpawn->GetRelativeLocation();
+			spawned->playerObject = this;
+
+		}
+	}
+}</code></pre>
+
+							<p>
+								The following code snippet shows what happens when player
+								decides to press the parry button.
+							</p>
+							<pre class="line-numbers">
+<code class="language-cpp">void AMyPlayer::PlayerParry() {
+	//disallows player from spamming the parry
+	if (currentDelayBetweenParry <= 0) {
+
+		currentDelayBetweenParry = maxDelayBetweenParry;
+		currentParryTime = parryDuration;
 
 	}
 }</code></pre>
 
 							<p>
-								The following code snippet shows how enemy steering about the
-								player is implemented. Steering is enemy walking around the
-								player between attacks.
+								The following code snippet shows what happens when player is
+								parrying and what happens when the parrying stops.
 							</p>
 							<pre class="line-numbers">
-	<code class="language-cpp">void AMyEnemyCorpseAIController::SteerAroundPlayer() {
-		//if the enemy is currently walking somewhere there is no need to steer
-		if (IsFollowingAPath() == false) {
-			if (myEnemyLogic != nullptr) {
-				if (navMesh != nullptr) {
-					steeringPlayer = true;
-					if (myEnemyLogic->player != nullptr) {
-	
-						//if enemy is too close to the player he walks to opposite direction from the player
-						if (FVector::Distance(GetNavAgentLocation(), myEnemyLogic->player->playerSkeletalMesh->GetComponentLocation()) <= minSteerDistance) {
-							StopMovement();
-							FVector forwardDirection = myEnemyLogic->player->GetActorLocation() - GetNavAgentLocation();
-							forwardDirection = FVector(-forwardDirection.X, -forwardDirection.Y, forwardDirection.Z);
-							forwardDirection.Normalize();
-							FNavLocation result;
-							navMesh->GetRandomPointInNavigableRadius(GetNavAgentLocation() + FVector(forwardDirection.X * 50, forwardDirection.Y * 50, 0), 1.0f, result);
-							MoveToLocation(result);
-						}
-	
-						//if enemy is too far he walks to the player
-						if (FVector::Distance(GetNavAgentLocation(), myEnemyLogic->player->playerSkeletalMesh->GetComponentLocation()) >= maxSteerDistance) {
-							StopMovement();
-							MoveToLocation(myEnemyLogic->player->playerSkeletalMesh->GetComponentLocation());
-						}
-	
-						//if enemy is not too far or too close he just walks to a random point around himself
-						if (!IsFollowingAPath()) {
-							FNavLocation randomLocation;
-							navMesh->GetRandomPointInNavigableRadius(GetNavAgentLocation(), 200.0f, randomLocation);
-							MoveToLocation(randomLocation);
-						}
-					}
-				}
-	
-				else {
-					navMesh = UNavigationSystemV1::GetCurrent(this);
-					AMyEnemyCorpseAIController::SteerAroundPlayer();
-				}
-	
-			}
-		}
+<code class="language-cpp">if (currentParryTime > 0.0f) {
+		parryShield->SetWorldLocation(projectileSpawn->GetComponentLocation() - FVector(0, 0, 0));
+		parryShield->SetWorldRotation(FRotator(playerSkeletalMesh->GetComponentRotation().Pitch, playerSkeletalMesh->GetComponentRotation().Yaw, 0));
+		parryShield->SetVisibility(true);
+		currentParryTime -= DeltaTime;
+	}
+
+	else {
+
+		parryShield->SetWorldLocation(projectileSpawn->GetComponentLocation() - FVector(0, 0, 0));
+		parryShield->SetWorldRotation(FRotator(playerSkeletalMesh->GetComponentRotation().Pitch, playerSkeletalMesh->GetComponentRotation().Yaw, 0));
+
+		parryShield->SetVisibility(false);
 	}</code></pre>
-							<p>
-								The following code snippet shows how enemy wait time between
-								attacks is handled.
-							</p>
-							<pre class="line-numbers">
-<code class="language-cpp">void AMyEnemyCorpseAIController::RandomizeWaitTime() {
-	//enemy waits between his attack so player has time to do stuff
-	//the wait duration is random
-	waitTimeBetweenAttacks = FMath::RandRange(minWaitTimeBetweenAttacks, maxWaitTimeBetweenAttacks);
-}</code></pre>
 						</div>
 					</div>
 
