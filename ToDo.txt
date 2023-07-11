@@ -1,1 +1,2 @@
+- top down shooter: okomentovat kod a swapnout kod na strance za okomentovany
 - dokoncit stranky projektu: tower def, topdown shooter, quiz, infinite runner
